@@ -3,9 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Domain.Context", "Robot.Domain.Context\Robot.Domain.Context.csproj", "{7F939BEA-9175-455C-AB07-B6366318C6D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{021C8893-1AA0-4442-A4D1-29B942BE6666}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GB.Robot.WPF_UI_MVVM", "GB.Robot.WPF_UI_MVVM\GB.Robot.WPF_UI_MVVM.csproj", "{4F95D5D4-4B47-4B69-9BAA-A56070A95B85}"
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F939BEA-9175-455C-AB07-B6366318C6D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F939BEA-9175-455C-AB07-B6366318C6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F939BEA-9175-455C-AB07-B6366318C6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F939BEA-9175-455C-AB07-B6366318C6D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -18,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F939BEA-9175-455C-AB07-B6366318C6D9} = {021C8893-1AA0-4442-A4D1-29B942BE6666}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7B48A0C-D5E9-4DDA-A7B4-D9C6278D2C86}
