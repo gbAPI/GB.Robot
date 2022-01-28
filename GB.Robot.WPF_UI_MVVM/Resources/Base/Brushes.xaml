@@ -18,4 +18,22 @@
     <SolidColorBrush x:Key="OrangeRedBrush" Color="OrangeRed" p:Freeze="true"/>
     <SolidColorBrush x:Key="DarkBrush" Color="DarkRed" p:Freeze="true"/>
 
+    <!--#region Цвета -->
+    <Color x:Key="PrimaryColor" A="#FF" R="#6B" B="#93" G="#14" />
+    <Color x:Key="BackgroundColor" A="#FF" R="#FF" B="#FF" G="#FF" />
+    <Color x:Key="DisableColor" A="#AA" R="#30" G="#30" B="#30"/>
+    <!--#endregion-->
+
+    <!--#region Кисти -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" p:Freeze="true"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" p:Freeze="true" />
+    <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource DisableColor}" p:Freeze="true" />
+
+    <LinearGradientBrush x:Key="WindowBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource PrimaryColor}"/>
+        <GradientStop Color="{StaticResource BackgroundColor}" Offset="0.185"/>
+    </LinearGradientBrush>
+
+    <!--#endregion-->
+
 </ResourceDictionary>

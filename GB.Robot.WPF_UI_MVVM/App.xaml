@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l="clr-namespace:GB.Robot.WPF_UI_MVVM"
              xmlns:vm="clr-namespace:GB.Robot.WPF_UI_MVVM.ViewModels"
-             StartupUri="Views/Windows/MainWindow.xaml">
+             StartupUri="Views/Windows/LoginWindow.xaml">
     <Application.Resources>
-         <ResourceDictionary>
-             <ResourceDictionary.MergedDictionaries>
-                 <ResourceDictionary Source="Infrastructure/Commands/Commands.xaml"/>
-                 <ResourceDictionary Source="Resources/Base/Brushes.xaml"/>
-             </ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Infrastructure/Commands/Commands.xaml"/>
+                <ResourceDictionary Source="Resources/Base/Brushes.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/CaptionStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/WindowStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-             <vm:ViewModelLocator x:Key="Locator"/>
-         </ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
