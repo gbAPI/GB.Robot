@@ -8,8 +8,8 @@ namespace Robot.DAL.Repos
 {
     public class BaseRepo<T> : IDisposable, IRepo<T> where T : BaseEntities.BaseEntity
     {
-        private readonly DbSet<T> _table;
-        private readonly RobotContext _dbContext;
+        protected readonly DbSet<T> _table;
+        protected readonly RobotContext _dbContext;
 
 
         public BaseRepo()
@@ -43,7 +43,7 @@ namespace Robot.DAL.Repos
             return _table.Find(id);
         }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return _table.ToList();
         }
