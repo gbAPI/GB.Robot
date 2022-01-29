@@ -21,8 +21,8 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition />
+                <RowDefinition Height="15*"/>
             </Grid.RowDefinitions>
             <!--#region Menu -->
             <Menu Background="{StaticResource TransparentBrush}">
@@ -44,72 +44,120 @@
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
+                    <!--Колонка 0-->
                     <ColumnDefinition Width="*"/>
+                    <!--Колонка 1-->
                     <ColumnDefinition Width="*"/>
+                    <!--Колонка 2-->
                     <ColumnDefinition Width="*"/>
+                    <!--Колонка 3-->
                 </Grid.ColumnDefinitions>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="25"/>
-                    </Grid.RowDefinitions>
+
+                <GroupBox Grid.ColumnSpan="2" Header="Установка условий дерева">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="2*"/>
+                            <!--Колонка 0-->
                             <ColumnDefinition Width="*"/>
+                            <!--Колонка 1-->
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Выбрать решение" 
+                        <!--#region Колонка 0 -->
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Выбрать решение" 
                                    TextWrapping="Wrap" 
                                    FontSize="10" 
                                    Style="{StaticResource TextBlock}"/>
-                        <ComboBox Grid.Column="1" SelectedIndex="-1" ItemsSource="{Binding TreeList}"/>
+                                <ComboBox Grid.Column="1" 
+                                  SelectedIndex="-1"
+                                          Margin="2"
+                                  Style="{StaticResource ComboBoxPrimaryStyle}"
+                                  ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                  ItemsSource="{Binding TreeList}">
+                                </ComboBox>
+                            </Grid>
+
+                            <!--#region ID -->
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="ID" Style="{StaticResource TextBlock}"/>
+                                <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
+                            </Grid>
+                            <!--#endregion-->
+                            <!--#region Имя -->
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
+                                <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
+                            </Grid>
+                            <!--#endregion-->
+
+                            <GroupBox Grid.Row="3" Header="Поля для решения">
+                                <ListBox ItemsSource="{Binding TreeList}" SelectedIndex="0"/>
+                            </GroupBox>
+
+                            <!--#region Кнопки -->
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Сохранить" FontSize="14" Style="{StaticResource ButtonStyle}"/>
+                                <Button Grid.Column="1" FontSize="14" Content="Удалить поле" Style="{StaticResource ButtonStyle}"/>
+                                <Button Grid.Column="2" FontSize="14" Content="Новое дерево" Style="{StaticResource ButtonStyle}"/>
+                            </Grid>
+                            <!--#endregion-->
+                        </Grid>
+                        <!--#endregion-->
+
+                        <!--#region Колонка 1 -->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="Список полей">
+                                <ListBox ItemsSource="{Binding TreeList}" SelectedIndex="1"/>
+                            </GroupBox>
+                            <Button Grid.Row="1" 
+                            Content="Добавить поле в дерево"
+                            Style="{StaticResource ButtonStyle}"/>
+                        </Grid>
+                        <!--#endregion-->
                     </Grid>
-                    
-                    <!--#region ID -->
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="ID" Style="{StaticResource TextBlock}"/>
-                        <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
-                    </Grid>
-                    <!--#endregion-->
-                    <!--#region Имя -->
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
-                        <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
-                    </Grid>
-                    <!--#endregion-->
-
-                    <GroupBox Grid.Row="3" Header="Поля для решения">
-
-                    </GroupBox>
-
-                    <!--#region Кнопки -->
-                    <Grid Grid.Row="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Content="Сохранить" FontSize="10" Style="{StaticResource ButtonStyle}"/>
-                        <Button Grid.Column="1" FontSize="8" Content="Удалить поле" Style="{StaticResource ButtonStyle}"/>
-                        <Button Grid.Column="2" FontSize="8" Content="Новое решение" Style="{StaticResource ButtonStyle}"/>
-                    </Grid>
-                    <!--#endregion-->
-                </Grid>
-
-                <GroupBox Grid.Column="1" Header="Список полей">
-
                 </GroupBox>
+                <!--#region Колонка 2 -->
+                <Grid Grid.Column="2" Margin="5,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Список шаблонов">
+                        <ListBox ItemsSource="{Binding TreeList}" SelectedIndex="0"/>
+                    </GroupBox>
+                    <Button Grid.Row="1" Content="Установить шаблон" 
+                            Style="{StaticResource ButtonStyle}"/>
+                </Grid>
+                <!--#endregion-->
+
             </Grid>
 
         </Grid>

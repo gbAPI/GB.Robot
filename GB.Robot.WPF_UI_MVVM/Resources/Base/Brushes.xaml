@@ -31,7 +31,7 @@
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" p:Freeze="true" />
     <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource DisableColor}" p:Freeze="true" />
 
-    <LinearGradientBrush x:Key="WindowBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+    <LinearGradientBrush x:Key="WindowBackground" EndPoint="0.5,0.7" StartPoint="0.5,0">
         <GradientStop Color="{StaticResource PrimaryColor}"/>
         <GradientStop Color="{StaticResource BackgroundColor}" Offset="0.185"/>
     </LinearGradientBrush>
