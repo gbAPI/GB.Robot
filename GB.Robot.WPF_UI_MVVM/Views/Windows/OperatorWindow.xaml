@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Windows"
         xmlns:lelem="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
         DataContext="{Binding OperatorWindowModel, Source={StaticResource Locator}}"
@@ -79,12 +80,17 @@
                                    TextWrapping="Wrap" 
                                    FontSize="10" 
                                    Style="{StaticResource TextBlock}"/>
-                                <ComboBox Grid.Column="1" 
+                                <ComboBox Grid.Column="1"
                                   SelectedIndex="-1"
                                           Margin="2"
                                   Style="{StaticResource ComboBoxPrimaryStyle}"
                                   ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
                                   ItemsSource="{Binding TreeList}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="DropDownOpened">
+                                            <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                 </ComboBox>
                             </Grid>
 
@@ -95,7 +101,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="ID" Style="{StaticResource TextBlock}"/>
-                                <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
+                                <TextBlock Grid.Column="1" Style="{StaticResource TextBlock}"/>
                             </Grid>
                             <!--#endregion-->
                             <!--#region Имя -->

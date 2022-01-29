@@ -1,4 +1,5 @@
-﻿using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
+﻿using GB.Robot.WPF_UI_MVVM.Infrastructure.Commands;
+using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
 {
-    internal class OperatorWindowViewModel:ViewModel
+    internal class OperatorWindowViewModel : ViewModel
     {
         #region Title: string - Название окна
         private string _Title = "Оператор робота";
@@ -20,7 +21,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #endregion
 
         #region TreeList: List<string> - Список решений
-        private List<string> _TreeList = new() {"1","2","3" };
+        private List<string> _TreeList = new() { "1", "2", "3" };
         /// <summary>Список решений</summary>
         public List<string> TreeList
         {
@@ -29,5 +30,20 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region DropDownOpenCommand - Команда выполняемая при открытии списка
+        /// <summary>Команда выполняемая при открытии списка</summary>
+        public LambdaCommand DropDownOpenCommand { get; }
+        private void OnDropDownOpenCommandExecuted()
+        {
+            Random random = new();
+            TreeList = new() { $"{random.Next(10)}", $"{random.Next(10)}", $"{random.Next(10)}", $"{random.Next(10)}" };
+        }
+        #endregion
+
+
+        public OperatorWindowViewModel()
+        {
+            DropDownOpenCommand = new LambdaCommand(OnDropDownOpenCommandExecuted);
+        }
     }
 }

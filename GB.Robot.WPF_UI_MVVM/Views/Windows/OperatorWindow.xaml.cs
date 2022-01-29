@@ -29,5 +29,6 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Windows
             if (e.ButtonState == MouseButtonState.Pressed)
                 DragMove();
         }
+
     }
 }
