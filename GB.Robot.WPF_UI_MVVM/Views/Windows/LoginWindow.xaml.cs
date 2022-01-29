@@ -26,5 +26,15 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Windows
                 DragMove();
             }
         }
+
+        private void OperatorShow(object sender, RoutedEventArgs e)
+        {
+            OperatorWindow window = new();
+            window.Visibility = Visibility.Visible;
+            Visibility = Visibility.Hidden;
+            window.ShowDialog();
+            Visibility = Visibility.Visible;
+            window = null;
+        }
     }
 }

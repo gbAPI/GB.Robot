@@ -7,7 +7,8 @@
         xmlns:elem="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
         mc:Ignorable="d"
         DataContext="{Binding LoginWindowModel, Source={StaticResource Locator}}"
-        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Style="{StaticResource FormStyle}"
+        WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Height="450" Width="800" >
     <Grid Style="{StaticResource WindowStyle}" >
         <Grid.RowDefinitions>
@@ -33,7 +34,7 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="1" Content="Оператор" Style="{StaticResource ButtonStyle}"/>
+                <Button Grid.Row="1" Content="Оператор" Style="{StaticResource ButtonStyle}" Click="OperatorShow"/>
                 <Button Grid.Row="2" Content="Администратор" Style="{StaticResource ButtonStyle}"/>
             </Grid>
             <!--#endregion-->

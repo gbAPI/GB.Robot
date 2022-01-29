@@ -1,0 +1,82 @@
+﻿<Window x:Class="GB.Robot.WPF_UI_MVVM.Views.Windows.OperatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Windows"
+        xmlns:lelem="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
+        DataContext="{Binding OperatorWindowModel, Source={StaticResource Locator}}"
+        Style="{StaticResource FormStyle}"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="800">
+    <Grid Style="{StaticResource WindowStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="CRow" Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <lelem:CaptionElement CaptionTitle="{Binding Title}" Height="25"/>
+        </Grid>
+        <!--#region Body -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--#region Menu -->
+            <Menu Background="{StaticResource TransparentBrush}">
+                <MenuItem Header="Обновить список полей"
+                          Height="25"
+                          Style="{StaticResource MenuItemStyle}">
+                </MenuItem>
+                <MenuItem Header="Обновить список шаблонов" 
+                          Height="25"
+                          Style="{StaticResource MenuItemStyle}">
+                </MenuItem>
+                <MenuItem Header=" Аудит " 
+                          Height="25"
+                          Style="{StaticResource MenuItemStyle}">
+                </MenuItem>
+            </Menu>
+            <!--#endregion-->
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ID" Style="{StaticResource TextBlock}"/>
+                        <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
+                        <TextBox Grid.Column="1" Text="123" Style="{StaticResource TextBox}"/>
+                    </Grid>
+                    <GroupBox Grid.Row="3" Header="Поля для решения"/>
+                </Grid>
+                
+                <GroupBox Grid.Column="1" Header="Список полей"/>
+            </Grid>
+            
+        </Grid>
+        <!--#endregion-->
+    </Grid>
+</Window>

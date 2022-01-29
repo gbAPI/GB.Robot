@@ -7,6 +7,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public static IServiceCollection AddViews(this IServiceCollection services) => services
            .AddSingleton<MainWindowViewModel>()
            .AddSingleton<LoginWindowViewModel>()
+           .AddSingleton<OperatorWindowViewModel>()
         ;
     }
 }

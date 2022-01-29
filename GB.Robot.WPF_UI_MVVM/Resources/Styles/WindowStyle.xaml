@@ -5,4 +5,8 @@
         <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
     </Style>
 
+    <Style x:Key="FormStyle" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+    </Style>
 </ResourceDictionary>
