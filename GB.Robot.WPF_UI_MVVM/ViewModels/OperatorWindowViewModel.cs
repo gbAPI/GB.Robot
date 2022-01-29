@@ -19,5 +19,15 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region TreeList: List<string> - Список решений
+        private List<string> _TreeList = new() {"1","2","3" };
+        /// <summary>Список решений</summary>
+        public List<string> TreeList
+        {
+            get => _TreeList;
+            set => Set(ref _TreeList, value);
+        }
+        #endregion
+
     }
 }
