@@ -14,19 +14,6 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Windows
             InitializeComponent();
         }
 
-        private void Window_StateChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void RowDefinition_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ButtonState == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
         private void OperatorShow(object sender, RoutedEventArgs e)
         {
             OperatorWindow window = new();

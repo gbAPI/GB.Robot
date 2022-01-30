@@ -15,7 +15,7 @@
             <RowDefinition x:Name="CRow" Height="25" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Grid.Row="0">
             <lelem:CaptionElement CaptionTitle="{Binding Title}" Height="25"/>
         </Grid>
         <!--#region Body -->

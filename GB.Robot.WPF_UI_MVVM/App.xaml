@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:l="clr-namespace:GB.Robot.WPF_UI_MVVM"
              xmlns:vm="clr-namespace:GB.Robot.WPF_UI_MVVM.ViewModels"
-             StartupUri="Views/Windows/OperatorWindow.xaml">
+             StartupUri="Views/Windows/LoginWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -8,6 +8,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
            .AddSingleton<MainWindowViewModel>()
            .AddSingleton<LoginWindowViewModel>()
            .AddSingleton<OperatorWindowViewModel>()
+           .AddSingleton<OperatorAuditWindowViewModel>()
         ;
     }
 }

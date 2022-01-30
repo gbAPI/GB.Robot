@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GB.Robot.WPF_UI_MVVM.Views.Elements
 {
@@ -40,8 +42,14 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Elements
         public CaptionElement()
         {
             InitializeComponent();
+            this.MouseLeftButtonDown += DragMoves;
         }
 
-
+        private void DragMoves(object sender, MouseButtonEventArgs e)
+        {
+            Window wind = App.FocusedWindow ?? App.ActivedWindow;
+            if (e.ButtonState == MouseButtonState.Pressed)
+                wind.DragMove();
+        }
     }
 }

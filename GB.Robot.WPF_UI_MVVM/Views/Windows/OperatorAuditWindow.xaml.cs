@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GB.Robot.WPF_UI_MVVM.Views.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для OperatorWindow.xaml
+    /// Логика взаимодействия для OperatorAuditWindow.xaml
     /// </summary>
-    public partial class OperatorWindow : Window
+    public partial class OperatorAuditWindow : Window
     {
-        public OperatorWindow()
+        public OperatorAuditWindow()
         {
             InitializeComponent();
         }

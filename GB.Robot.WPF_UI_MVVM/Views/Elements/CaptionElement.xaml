@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid  Style="{StaticResource CaptionBackgroundStyle}" >
@@ -15,7 +16,11 @@
             <ColumnDefinition Width="{Binding ElementName=Caption, Path=Height}" />
             <ColumnDefinition Width="{Binding ElementName=Caption, Path=Height}" />
         </Grid.ColumnDefinitions>
-
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <i:ActivateStateAction TargetState="" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <TextBlock Grid.Column="1" Text="{Binding ElementName=Caption, Path=CaptionTitle}" 
                    Style="{StaticResource CaptionTextStyle}" />
 
