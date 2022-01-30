@@ -24,6 +24,12 @@ namespace Robot.DAL.Repos
             return _dbContext.Set<Template>().ToList();
         }
 
+
+        public Template GetTemplateById(int id)
+        {
+            return _dbContext.Set<Template>().Find(id);
+        }
+
         public void Dispose()
         {
             _dbContext?.Dispose();

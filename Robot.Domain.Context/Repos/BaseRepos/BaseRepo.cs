@@ -48,11 +48,11 @@ namespace Robot.DAL.Repos
             return _table.ToList();
         }
 
-        public int Save(T entity)
+        public bool Save(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            SaveChanges();
-            return entity.ID;
+            
+            return SaveChanges();
         }
 
 

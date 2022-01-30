@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Robot.Core.BusinessObjects\Robot.Core.BusinessObjects.csproj" />
+    <ProjectReference Include="..\Robot.Domain.Context\Robot.Domain.Context.csproj" />
+  </ItemGroup>
+
+</Project>

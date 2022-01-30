@@ -22,8 +22,8 @@ namespace Robot.DAL.Repos.Interfaces
         /// Сохраняет изменения в объекте бд
         /// </summary>
         /// <param name="entity">Сущность, по которой произошли изменения</param>
-        /// <returns>Идентификатор сохраняемой сущности</returns>
-        int Save(T entity);
+        /// <returns>Флаг успешности операции</returns>
+        bool Save(T entity);
 
         /// <summary>
         /// Удаляет запись базы данных
