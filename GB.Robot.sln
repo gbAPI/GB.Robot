@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{021C8893-1AA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicLayer", "BusinessLogicLayer", "{6DADECF1-F9B9-4366-8136-42A366DC9470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Core.BusinessObjects", "Robot.Core.BusinessObjects\Robot.Core.BusinessObjects.csproj", "{90A08810-FF51-4FE5-BA2C-2460F8927773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Core.BusinessObjects", "Robot.Core.BusinessObjects\Robot.Core.BusinessObjects.csproj", "{90A08810-FF51-4FE5-BA2C-2460F8927773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Core.Services", "Robot.Core.Services\Robot.Core.Services.csproj", "{748FBEFA-68C4-4908-9216-295496A11AEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Core.Services", "Robot.Core.Services\Robot.Core.Services.csproj", "{748FBEFA-68C4-4908-9216-295496A11AEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

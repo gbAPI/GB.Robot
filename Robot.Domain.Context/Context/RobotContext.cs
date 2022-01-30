@@ -16,6 +16,8 @@ namespace Robot.DAL
 
         DbSet<Template> Templates { get; }
 
+        DbSet<DocumentType> DocumentTypes { get; }
+
         public RobotContext() : base()
         {
             

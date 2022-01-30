@@ -5,15 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Robot.DAL.Entities
 {
     /// <summary>
-    /// Настроенные для пакета поля. Внешняя таблица
+    /// Типы документов. Внешняя таблица
     /// </summary>
-    [Table("ScannerFields")]
-    public class ScannerField : BaseEntity
+    [Table("DocumentTypes")]
+    public class DocumentType : BaseEntity
     {
         /// <summary>
-        /// Наименование поля
+        /// Наименование шаблона
         /// </summary>
-
         [StringLength(250)]
         public string Name { get; set; }
     }

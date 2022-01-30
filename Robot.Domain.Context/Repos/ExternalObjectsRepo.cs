@@ -30,6 +30,13 @@ namespace Robot.DAL.Repos
             return _dbContext.Set<Template>().Find(id);
         }
 
+        public ICollection<string> GetAllDocumentTypes()
+        {
+            return _dbContext.Set<DocumentType>()
+                .Select(x => x.Name)
+                .ToList();
+        }
+
         public void Dispose()
         {
             _dbContext?.Dispose();
