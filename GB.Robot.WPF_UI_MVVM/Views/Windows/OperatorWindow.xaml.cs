@@ -23,5 +23,7 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Windows
         {
             InitializeComponent();
         }
+
+       
     }
 }

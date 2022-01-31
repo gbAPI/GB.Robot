@@ -29,12 +29,13 @@
             <Menu Background="{StaticResource TransparentBrush}">
                 <MenuItem Header="Обновить список полей"
                           Height="25"
+                          Command="{Binding UpdateFieldListCommand}"
                           Style="{StaticResource MenuItemStyle}">
                 </MenuItem>
-                <MenuItem Header="Обновить список шаблонов" 
+                <!--<MenuItem Header="Обновить список шаблонов" 
                           Height="25"
                           Style="{StaticResource MenuItemStyle}">
-                </MenuItem>
+                </MenuItem>-->
                 <MenuItem Header=" Аудит " 
                           Height="25"
                           Style="{StaticResource MenuItemStyle}">
@@ -128,8 +129,16 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
                                 <TextBox Grid.Column="1"
-                                         Text="{Binding SelectedRule.Name}"
-                                         Style="{StaticResource TextBox}"/>
+                                         Text="{Binding SelectedRule.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <!--<i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding ChangeNameCommand}" 
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type TextBox}},
+                                                Path=Text}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>-->
+                                </TextBox>
                             </Grid>
                             <!--#endregion-->
 
@@ -214,7 +223,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
-                            <TextBox Style="{StaticResource TextBox}"  Text="{Binding RuleDescription}"/>
+                            <TextBox Text="{Binding RuleDescription}"/>
                             <Button Grid.Row="1" 
                             Content="Добавить описание"
                             Style="{StaticResource ButtonStyle}"/>
@@ -227,27 +236,19 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
-                            <ComboBox ItemsSource="{Binding TemplatesList}"
-                                 DisplayMemberPath="Name"
+                            <ComboBox ItemsSource="{Binding DocTypesList}"
                                  Style="{StaticResource ComboBoxPrimaryStyle}"
                                  ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
-                                 SelectedValue="{Binding SelectedTemplate}"
-                                 SelectedIndex="{Binding SelectedTemplateIndex}">
+                                 SelectedValue="{Binding SelectedDocType}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="DropDownOpened">
-                                        <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
-                                    </i:EventTrigger>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding SelectedCommand}"
-                                                                   CommandParameter="{Binding 
-                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
-                                                Path=SelectedValue}"/>
+                                        <i:InvokeCommandAction Command="{Binding UpdateDocTypeCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
                             <Button Grid.Row="1" Content="Установить тип" 
                                     Style="{StaticResource ButtonStyle}"
-                                    Command="{Binding SetTemplate}"/>
+                                    Command="{Binding SetDocTypeCommand}"/>
                         </Grid>
                     </GroupBox>
                     
@@ -265,7 +266,7 @@
                                  SelectedIndex="{Binding SelectedTemplateIndex}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="DropDownOpened">
-                                        <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
+                                        <i:InvokeCommandAction Command="{Binding UpdateTemplateListCommand}"/>
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <i:InvokeCommandAction Command="{Binding SelectedCommand}"
@@ -287,7 +288,7 @@
                 <!--#region Колонка 3 -->
                 <Grid Grid.Column="3">
                     <GroupBox Header="Описание элемента">
-                        <TextBox Style="{StaticResource TextBox}" IsEnabled="False"  Text="{Binding Description}"/>
+                        <TextBox IsEnabled="False"  Text="{Binding Description}"/>
                     </GroupBox>
                 </Grid>
                 <!--#endregion-->

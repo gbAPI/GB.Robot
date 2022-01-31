@@ -56,8 +56,8 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
                         {
                             SelectedTemplateIndex = -1;
                         }
+                        SelectedDocType = value.DocumentType;
                     }
-
             }
 
         }
@@ -143,6 +143,26 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region DocTypesList: List<string> - Список типов документов
+        private List<string> _docTypesList = default;
+        /// <summary>Список типов документов</summary>
+        public List<string> DocTypesList
+        {
+            get => _docTypesList;
+            set => Set(ref _docTypesList, value);
+        }
+        #endregion
+
+        #region SelectedDocType: string - Выбранный тип документа
+        private string _selectedDocType = "";
+        /// <summary>Выбранный тип документа</summary>
+        public string SelectedDocType
+        {
+            get => _selectedDocType;
+            set => Set(ref _selectedDocType, value);
+        }
+        #endregion
+
 
         #region SelectedCommand - Выполняется при выделении элемента
         /// <summary>Выполняется при выделении элемента</summary>
@@ -175,6 +195,21 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         private void OnUpdateTemplateListCommandExecuted()
         {
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
+            if (SelectedRule != null)
+            {
+                if (SelectedRule.Template != null)
+                {
+                    for (int i = 0; i <= TemplatesList.Count - 1; i++)
+                    {
+                        if (SelectedRule.Template.ID == TemplatesList[i].ID)
+                            SelectedTemplateIndex = i;
+                    }
+                }
+                else
+                {
+                    SelectedTemplateIndex = -1;
+                }
+            }
         }
         #endregion
 
@@ -187,12 +222,31 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region UpdateDocTypeCommand - Deafault Comment
+        /// <summary>Deafault Comment</summary>
+        public LambdaCommand UpdateDocTypeCommand { get; }
+        private void OnUpdateDocTypeCommandExecuted()
+        {
+            List<string> lis = _externalObjectsService.GetAllDocumentTypes().ToList();
+            lis.Insert(0, "");
+            DocTypesList = lis;
+            SelectedDocType = SelectedRule?.DocumentType ?? "";
+        }
+        #endregion
+
         #region NewRule - Создаем новое решение
         /// <summary>Создаем новое решение</summary>
         public LambdaCommand NewRule { get; }
         private void OnNewRuleExecuted()
         {
-            SelectedRule = new BO_Rule() { ID = -1 };
+            SelectedRule = new BO_Rule()
+            {
+                ID = -1,
+                Template = new(),
+                DocumentType = "",
+                Name = "",
+                RequiredFields = new()
+            };
             Description = "";
             RuleDescription = "";
         }
@@ -203,6 +257,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public LambdaCommand AddFieldToRule { get; }
         private void OnAddFieldToRuleExecuted()
         {
+
             if (SelectedRule.RequiredFields.FirstOrDefault(f => f.Name == SelectedScanerField.Name) == null)
             {
                 SelectedRule.RequiredFields.Add(SelectedScanerField);
@@ -215,6 +270,17 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #region SetTemplate - Указать шаблон для решения
         /// <summary>Указать шаблон для решения</summary>
         public LambdaCommand SetTemplate { get; }
+
+        private bool CanSetTemplateExecute()
+        {
+            if (SelectedRule == null || SelectedRule.Template == null)
+                return false;
+
+            if (SelectedRule.Template.ID == SelectedTemplate?.ID)
+                return false;
+
+            return true;
+        }
         private void OnSetTemplateExecuted()
         {
             if (SelectedRule.Template != SelectedTemplate)
@@ -228,6 +294,16 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #region SetDescription - Устанавливает описание решению
         /// <summary>Устанавливает описание решению</summary>
         public LambdaCommand SetDescription { get; }
+
+        private bool CanSetDescriptionExecute()
+        {
+            if (SelectedRule == null || SelectedRule.Description == null)
+                return false;
+            if (SelectedRule.Description.Equals(Description))
+                return false;
+
+            return true;
+        }
         private void OnSetDescriptionExecuted()
         {
             if (!SelectedRule.Description.Equals(Description))
@@ -238,25 +314,51 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region SetDocTypeCommand - Устанавливаем тип документа для правила
+        /// <summary>Устанавливаем тип документа для правила</summary>
+        public LambdaCommand SetDocTypeCommand { get; }
+
+        private bool CanSetDocTypeCommandExecute()
+        {
+            if (SelectedRule == null || SelectedRule.DocumentType == null)
+                return false;
+            if (!SelectedRule.DocumentType.Equals(SelectedDocType, System.StringComparison.Ordinal))
+                return true;
+            return false;
+        }
+        private void OnSetDocTypeCommandExecuted()
+        {
+            SelectedRule.DocumentType = SelectedDocType;
+            SelectedRule = SelectedRule.Clone();
+        }
+        #endregion
+
         #region SaveRule - Сохраняем изменения решения
         /// <summary>Сохраняем изменения решения</summary>
         public LambdaCommand SaveRule { get; }
+
+        private bool CanSaveRuleExecute()
+        {
+            if (SelectedRule is null)
+                return false;
+            if (string.IsNullOrWhiteSpace(SelectedRule.Name))
+                return false;
+            if (SelectedRule.RequiredFields.Count <= 0)
+                return false;
+            if (SelectedRule.Template == null)
+                return false;
+            if (SelectedRule.DocumentType == null)
+                return false;
+
+            return true;
+        }
+
         private void OnSaveRuleExecuted()
         {
-            if (string.IsNullOrWhiteSpace(SelectedRule.Name))
-                return;
-            if (SelectedRule.RequiredFields.Count <= 0)
-                return;
-            if (SelectedRule.Template == null)
-                return;
-            if (string.IsNullOrWhiteSpace(SelectedRule.DocumentType))
-                return;
-
             if (SelectedRule.ID == -1)
                 _rulesService.Add(SelectedRule);
             else
                 _rulesService.Update(SelectedRule);
-
         }
         #endregion
 
@@ -268,10 +370,12 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             UpdateTemplateListCommand = new(OnUpdateTemplateListCommandExecuted);
             NewRule = new(OnNewRuleExecuted);
             AddFieldToRule = new(OnAddFieldToRuleExecuted);
-            SetTemplate = new(OnSetTemplateExecuted);
-            SetDescription = new(OnSetDescriptionExecuted);
-            SaveRule = new(OnSaveRuleExecuted);
+            SetTemplate = new(OnSetTemplateExecuted, CanSetTemplateExecute);
+            SetDescription = new(OnSetDescriptionExecuted, CanSetDescriptionExecute);
+            SaveRule = new(OnSaveRuleExecuted, CanSaveRuleExecute);
             UpdateFieldListCommand = new(OnUpdateFieldListCommandExecuted);
+            UpdateDocTypeCommand = new(OnUpdateDocTypeCommandExecuted);
+            SetDocTypeCommand = new(OnSetDocTypeCommandExecuted, CanSetDocTypeCommandExecute);
             #endregion
 
             _rulesService = rulesService;
@@ -279,6 +383,8 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
             FieldsList = _externalObjectsService.GetScannerFields().ToList();
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
+            DocTypesList = _externalObjectsService.GetAllDocumentTypes().ToList();
+            DocTypesList.Insert(0, "");
         }
     }
 }

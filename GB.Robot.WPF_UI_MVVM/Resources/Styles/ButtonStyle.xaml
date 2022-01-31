@@ -26,9 +26,14 @@
                 <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}" />
                 <Setter Property="BorderBrush" Value="{StaticResource TransparentBrush}" />
                 <Setter Property="Background" Value="{StaticResource LightPrimaryBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource DisableBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightGrayBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
