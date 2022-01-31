@@ -52,7 +52,7 @@
                     <ColumnDefinition Width="*"/>
                     <!--Колонка 3-->
                     <ColumnDefinition Width="*"/>
-                    
+
                 </Grid.ColumnDefinitions>
 
                 <GroupBox Grid.ColumnSpan="2" Header="Установка условий дерева">
@@ -98,7 +98,7 @@
                                           >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="DropDownOpened">
-                                            <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
+                                            <i:InvokeCommandAction Command="{Binding UpdateRulesList}"/>
                                         </i:EventTrigger>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding SelectedCommand}" 
@@ -204,40 +204,11 @@
                 <Grid Grid.Column="2" Margin="5,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Список шаблонов">
-                        <ListBox ItemsSource="{Binding TemplatesList}"
-                                 DisplayMemberPath="Name"
-                                 SelectedValue="{Binding SelectedTemplate}"
-                                 SelectedIndex="{Binding SelectedTemplateIndex}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding SelectedCommand}"
-                                                                   CommandParameter="{Binding 
-                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
-                                                Path=SelectedValue}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ListBox>
-                    </GroupBox>
-                    <Button Grid.Row="1" Content="Установить шаблон" 
-                            Style="{StaticResource ButtonStyle}"
-                            Command="{Binding SetTemplate}"/>
-                </Grid>
-                <!--#endregion-->
 
-                <!--#region Колонка 3 -->
-                <Grid Grid.Column="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="35"/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Header="Описание элемента">
-                        <TextBox Style="{StaticResource TextBox}" IsEnabled="False"  Text="{Binding Description}"/>
-                    </GroupBox>
-                    <GroupBox Grid.Row="1" Grid.RowSpan="2"  Header="Описание решения">
+                    <GroupBox Grid.Row="0" Header="Описание решения">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -249,12 +220,78 @@
                             Style="{StaticResource ButtonStyle}"/>
                         </Grid>
                     </GroupBox>
+
+                    <GroupBox Grid.Row="1" Header="Тип документа">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <ComboBox ItemsSource="{Binding TemplatesList}"
+                                 DisplayMemberPath="Name"
+                                 Style="{StaticResource ComboBoxPrimaryStyle}"
+                                 ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                 SelectedValue="{Binding SelectedTemplate}"
+                                 SelectedIndex="{Binding SelectedTemplateIndex}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="DropDownOpened">
+                                        <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedCommand}"
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <Button Grid.Row="1" Content="Установить тип" 
+                                    Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding SetTemplate}"/>
+                        </Grid>
+                    </GroupBox>
                     
+                    <GroupBox Grid.Row="2" Header="Шаблоны">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <ComboBox ItemsSource="{Binding TemplatesList}"
+                                 DisplayMemberPath="Name"
+                                 Style="{StaticResource ComboBoxPrimaryStyle}"
+                                 ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                 SelectedValue="{Binding SelectedTemplate}"
+                                 SelectedIndex="{Binding SelectedTemplateIndex}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="DropDownOpened">
+                                        <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedCommand}"
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <Button Grid.Row="1" Content="Установить шаблон" 
+                                    Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding SetTemplate}"/>
+                        </Grid>
+                    </GroupBox>
+
                 </Grid>
                 <!--#endregion-->
 
+                <!--#region Колонка 3 -->
+                <Grid Grid.Column="3">
+                    <GroupBox Header="Описание элемента">
+                        <TextBox Style="{StaticResource TextBox}" IsEnabled="False"  Text="{Binding Description}"/>
+                    </GroupBox>
+                </Grid>
+                <!--#endregion-->
             </Grid>
-
         </Grid>
         <!--#endregion-->
     </Grid>

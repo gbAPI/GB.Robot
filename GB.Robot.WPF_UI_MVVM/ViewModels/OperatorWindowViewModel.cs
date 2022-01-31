@@ -2,12 +2,8 @@
 using GB.Robot.WPF_UI_MVVM.Infrastructure.Commands;
 using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
 using Robot.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
 {
@@ -17,46 +13,36 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         private readonly IExternalObjectsService _externalObjectsService;
 
         #region Title: string - Название окна
-        private string _Title = "Оператор робота";
+        private string _title = "Оператор робота";
         /// <summary>Название окна</summary>
         public string Title
         {
-            get => _Title;
-            set => Set(ref _Title, value);
-        }
-        #endregion
-
-        #region TreeList: List<string> - Список решений
-        private List<string> _TreeList = new() { "1", "2", "3" };
-        /// <summary>Список решений</summary>
-        public List<string> TreeList
-        {
-            get => _TreeList;
-            set => Set(ref _TreeList, value);
+            get => _title;
+            set => Set(ref _title, value);
         }
         #endregion
 
         #region RulesList: List<BO_Rule> - Список решений
-        private List<BO_Rule> _RulesList = default;
+        private List<BO_Rule> _rulesList = default;
 
         /// <summary>Список решений</summary>
         public List<BO_Rule> RulesList
         {
-            get => _RulesList;
-            set => Set(ref _RulesList, value);
+            get => _rulesList;
+            set => Set(ref _rulesList, value);
         }
         #endregion
 
         #region SelectedRule: BO_Rule - Выбранное решение
-        private BO_Rule _SelectedRule = new() { ID=-1};
+        private BO_Rule _selectedRule = new() { ID = -1 };
         /// <summary>Выбранное правило</summary>
         public BO_Rule SelectedRule
         {
-            get => _SelectedRule;
+            get => _selectedRule;
             set
             {
-                if (Set(ref _SelectedRule, value))
-                    if (value != null) 
+                if (Set(ref _selectedRule, value))
+                    if (value != null)
                     {
                         if (value.Template != null)
                         {
@@ -71,89 +57,89 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
                             SelectedTemplateIndex = -1;
                         }
                     }
-                    
+
             }
 
         }
         #endregion
 
         #region SelectedField: BO_Field - Выделенное поле из списка решений
-        private BO_Field _SelectedField = default;
+        private BO_Field _selectedField = default;
         /// <summary>Выделенное поле из списка решений</summary>
         public BO_Field SelectedField
         {
-            get => _SelectedField;
-            set => Set(ref _SelectedField, value);
+            get => _selectedField;
+            set => Set(ref _selectedField, value);
         }
         #endregion
 
         #region SelectedScanerField: BO_Field - Выделенное поле из списка полей
-        private BO_Field _SelectedScanerField = default;
+        private BO_Field _selectedScanerField = default;
         /// <summary>Выделенное поле из списка полей</summary>
         public BO_Field SelectedScanerField
         {
-            get => _SelectedScanerField;
-            set => Set(ref _SelectedScanerField, value);
+            get => _selectedScanerField;
+            set => Set(ref _selectedScanerField, value);
         }
         #endregion
 
         #region Description: string - Описание выделенного элемента
-        private string _Description = default;
+        private string _description = default;
         /// <summary>Описание выделенного элемента</summary>
         public string Description
         {
-            get => _Description;
-            set => Set(ref _Description, value);
+            get => _description;
+            set => Set(ref _description, value);
         }
         #endregion
 
         #region RuleDescription: string - Описание решения
-        private string _RuleDescription = default;
+        private string _ruleDescription = default;
         /// <summary>Описание решения</summary>
         public string RuleDescription
         {
-            get => _RuleDescription;
-            set => Set(ref _RuleDescription, value);
+            get => _ruleDescription;
+            set => Set(ref _ruleDescription, value);
         }
         #endregion
 
         #region FieldsList: List<BO_Field> - Список полей
-        private List<BO_Field> _FieldsList = default;
+        private List<BO_Field> _fieldsList = default;
         /// <summary>Список полей</summary>
         public List<BO_Field> FieldsList
         {
-            get => _FieldsList;
-            set => Set(ref _FieldsList, value);
+            get => _fieldsList;
+            set => Set(ref _fieldsList, value);
         }
         #endregion
 
         #region TemplatesList: List<BO_Template> - Список шаблонов
-        private List<BO_Template> _TemplatesList = default;
+        private List<BO_Template> _templatesList = default;
         /// <summary>Список шаблонов</summary>
         public List<BO_Template> TemplatesList
         {
-            get => _TemplatesList;
-            set => Set(ref _TemplatesList, value);
+            get => _templatesList;
+            set => Set(ref _templatesList, value);
         }
         #endregion
 
         #region SelectedTemplate: BO_Template - Выбранный шаблон
-        private BO_Template _SelectedTemplate = default;
+        private BO_Template _selectedTemplate = default;
         /// <summary>Выбранный шаблон</summary>
         public BO_Template SelectedTemplate
         {
-            get => _SelectedTemplate;
-            set => Set(ref _SelectedTemplate, value);
+            get => _selectedTemplate;
+            set => Set(ref _selectedTemplate, value);
         }
         #endregion
 
         #region SelectedTemplateIndex: int - Индекс выбранного шаблона
-        private int _SelectedTemplateIndex = 0;
+        private int _selectedTemplateIndex = 0;
         /// <summary>Индекс выбранного шаблона</summary>
         public int SelectedTemplateIndex
         {
-            get => _SelectedTemplateIndex;
-            set => Set(ref _SelectedTemplateIndex, value);
+            get => _selectedTemplateIndex;
+            set => Set(ref _selectedTemplateIndex, value);
         }
         #endregion
 
@@ -174,12 +160,30 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
-        #region DropDownOpenCommand - Команда выполняемая при открытии списка
+        #region UpdateRulesList - Команда выполняемая при открытии списка
         /// <summary>Команда выполняемая при открытии списка</summary>
-        public LambdaCommand DropDownOpenCommand { get; }
+        public LambdaCommand UpdateRulesList { get; }
         private void OnDropDownOpenCommandExecuted()
         {
             RulesList = _rulesService.GetAll().ToList();
+        }
+        #endregion
+
+        #region UpdateTemplateListCommand - Обновляем список шаблонов
+        /// <summary>Обновляем список шаблонов</summary>
+        public LambdaCommand UpdateTemplateListCommand { get; }
+        private void OnUpdateTemplateListCommandExecuted()
+        {
+            TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
+        }
+        #endregion
+
+        #region UpdateFieldListCommand - Обновляем список полей
+        /// <summary>Обновляем список полей</summary>
+        public LambdaCommand UpdateFieldListCommand { get; }
+        private void OnUpdateFieldListCommandExecuted()
+        {
+            FieldsList = _externalObjectsService.GetScannerFields().ToList();
         }
         #endregion
 
@@ -188,7 +192,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public LambdaCommand NewRule { get; }
         private void OnNewRuleExecuted()
         {
-            SelectedRule = new BO_Rule() { ID=-1};
+            SelectedRule = new BO_Rule() { ID = -1 };
             Description = "";
             RuleDescription = "";
         }
@@ -259,13 +263,15 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public OperatorWindowViewModel(IRulesService rulesService, IExternalObjectsService externalObjectsService)
         {
             #region Инициализация команд
-            DropDownOpenCommand = new(OnDropDownOpenCommandExecuted);
+            UpdateRulesList = new(OnDropDownOpenCommandExecuted);
             SelectedCommand = new(OnSelectedCommandExecuted);
+            UpdateTemplateListCommand = new(OnUpdateTemplateListCommandExecuted);
             NewRule = new(OnNewRuleExecuted);
             AddFieldToRule = new(OnAddFieldToRuleExecuted);
             SetTemplate = new(OnSetTemplateExecuted);
             SetDescription = new(OnSetDescriptionExecuted);
             SaveRule = new(OnSaveRuleExecuted);
+            UpdateFieldListCommand = new(OnUpdateFieldListCommandExecuted);
             #endregion
 
             _rulesService = rulesService;
