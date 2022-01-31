@@ -38,7 +38,7 @@ namespace Robot.DAL.Repos
             _dbContext?.Dispose();
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             return _table.Find(id);
         }

@@ -11,5 +11,10 @@ namespace Robot.DAL.Repos
         {
             return _table.Include(x => x.RequiredFields).ToList();
         }
+
+        public override Decision Get(int id)
+        {
+            return _table.Include(x => x.RequiredFields).FirstOrDefault(x=>x.ID == id);
+        }
     }
 }
