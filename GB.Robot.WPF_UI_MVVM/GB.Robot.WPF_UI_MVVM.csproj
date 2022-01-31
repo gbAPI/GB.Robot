@@ -22,4 +22,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Robot.Core.Services\Robot.Core.Services.csproj" />
+  </ItemGroup>
+
 </Project>

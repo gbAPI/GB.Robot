@@ -4,7 +4,7 @@
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Margin" Value="2,2,2,2"/>
         <Setter Property="Template">

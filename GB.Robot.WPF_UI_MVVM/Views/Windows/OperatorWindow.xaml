@@ -44,14 +44,15 @@
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
                     <!--Колонка 0-->
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                     <!--Колонка 1-->
                     <ColumnDefinition Width="*"/>
                     <!--Колонка 2-->
                     <ColumnDefinition Width="*"/>
                     <!--Колонка 3-->
+                    <ColumnDefinition Width="*"/>
+                    
                 </Grid.ColumnDefinitions>
 
                 <GroupBox Grid.ColumnSpan="2" Header="Установка условий дерева">
@@ -75,20 +76,35 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="25"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Выбрать решение" 
                                    TextWrapping="Wrap" 
                                    FontSize="10" 
                                    Style="{StaticResource TextBlock}"/>
+                                <Button Content="X" 
+                                        Grid.Column="2"
+                                        Foreground="Red"
+                                        ToolTip="Удалить выбранное правило"
+                                        Style="{StaticResource ButtonStyle}" />
                                 <ComboBox Grid.Column="1"
-                                  SelectedIndex="-1"
+                                          SelectedIndex="-1"
                                           Margin="2"
-                                  Style="{StaticResource ComboBoxPrimaryStyle}"
-                                  ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
-                                  ItemsSource="{Binding TreeList}">
+                                          Style="{StaticResource ComboBoxPrimaryStyle}"
+                                          ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                          ItemsSource="{Binding RulesList}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValue="{Binding SelectedRule}"
+                                          >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="DropDownOpened">
                                             <i:InvokeCommandAction Command="{Binding DropDownOpenCommand}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" 
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>
@@ -101,7 +117,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="ID" Style="{StaticResource TextBlock}"/>
-                                <TextBlock Grid.Column="1" Style="{StaticResource TextBlock}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding SelectedRule.ID}" Style="{StaticResource TextBlock}"/>
                             </Grid>
                             <!--#endregion-->
                             <!--#region Имя -->
@@ -111,12 +127,27 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
-                                <TextBox Grid.Column="1" Style="{StaticResource TextBox}"/>
+                                <TextBox Grid.Column="1"
+                                         Text="{Binding SelectedRule.Name}"
+                                         Style="{StaticResource TextBox}"/>
                             </Grid>
                             <!--#endregion-->
 
                             <GroupBox Grid.Row="3" Header="Поля для решения">
-                                <ListBox ItemsSource="{Binding TreeList}" SelectedIndex="0"/>
+                                <ListBox 
+                                    ItemsSource="{Binding SelectedRule.RequiredFields}" 
+                                    DisplayMemberPath="Name"
+                                    SelectedValue="{Binding SelectedField}"
+                                    SelectedIndex="0">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}"
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListBox>
                             </GroupBox>
 
                             <!--#region Кнопки -->
@@ -126,9 +157,16 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Content="Сохранить" FontSize="14" Style="{StaticResource ButtonStyle}"/>
+                                <Button Content="Сохранить" 
+                                        FontSize="14" 
+                                        Command="{Binding SaveRule}"
+                                        Style="{StaticResource ButtonStyle}"/>
                                 <Button Grid.Column="1" FontSize="14" Content="Удалить поле" Style="{StaticResource ButtonStyle}"/>
-                                <Button Grid.Column="2" FontSize="14" Content="Новое дерево" Style="{StaticResource ButtonStyle}"/>
+                                <Button Grid.Column="2" 
+                                        FontSize="14" 
+                                        Command="{Binding NewRule}"
+                                        Content="Новое дерево" 
+                                        Style="{StaticResource ButtonStyle}"/>
                             </Grid>
                             <!--#endregion-->
                         </Grid>
@@ -141,10 +179,22 @@
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
                             <GroupBox Grid.Row="0" Header="Список полей">
-                                <ListBox ItemsSource="{Binding TreeList}" SelectedIndex="1"/>
+                                <ListBox ItemsSource="{Binding FieldsList}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValue="{Binding SelectedScanerField}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" 
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListBox>
                             </GroupBox>
                             <Button Grid.Row="1" 
                             Content="Добавить поле в дерево"
+                                    Command="{Binding AddFieldToRule}"
                             Style="{StaticResource ButtonStyle}"/>
                         </Grid>
                         <!--#endregion-->
@@ -157,10 +207,49 @@
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <GroupBox Header="Список шаблонов">
-                        <ListBox ItemsSource="{Binding TreeList}" SelectedIndex="0"/>
+                        <ListBox ItemsSource="{Binding TemplatesList}"
+                                 DisplayMemberPath="Name"
+                                 SelectedValue="{Binding SelectedTemplate}"
+                                 SelectedIndex="{Binding SelectedTemplateIndex}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectedCommand}"
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
                     </GroupBox>
                     <Button Grid.Row="1" Content="Установить шаблон" 
+                            Style="{StaticResource ButtonStyle}"
+                            Command="{Binding SetTemplate}"/>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Колонка 3 -->
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Описание элемента">
+                        <TextBox Style="{StaticResource TextBox}" IsEnabled="False"  Text="{Binding Description}"/>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Grid.RowSpan="2"  Header="Описание решения">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Style="{StaticResource TextBox}"  Text="{Binding RuleDescription}"/>
+                            <Button Grid.Row="1" 
+                            Content="Добавить описание"
                             Style="{StaticResource ButtonStyle}"/>
+                        </Grid>
+                    </GroupBox>
+                    
                 </Grid>
                 <!--#endregion-->
 
