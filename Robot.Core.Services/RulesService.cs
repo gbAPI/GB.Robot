@@ -1,4 +1,6 @@
 ﻿using Robot.DAL.Repos;
+using Robot.DAL.Entities;
+
 using System.Linq;
 using System;
 namespace Robot.Core
@@ -23,7 +25,7 @@ namespace Robot.Core
 
         public bool Delete(BO_Rule rule)
         {
-            return _rulesRepo.Delete(rule.To_DAL());
+            return _rulesRepo.Delete(_rulesRepo.Get(rule.ID));
         }
 
         public BO_Rule[] GetAll()
@@ -60,7 +62,21 @@ namespace Robot.Core
 
         public bool Update(BO_Rule rule)
         {
-            return _rulesRepo.Save(rule.To_DAL());
+            var decision = _rulesRepo.Get(rule.ID);
+
+            decision.Name = rule.Name;
+            decision.OutputTemplateID = rule.Template.ID;
+            decision.DocumentType = rule.DocumentType;
+            decision.Description = rule.Description;
+            decision.RequiredFields = rule.RequiredFields
+                .Select(x => new Field
+                {
+                    FieldName = x.Name,
+                    Description = x.Description
+                })
+                .ToList();
+
+            return _rulesRepo.Save(decision);
         }
     }
 }
