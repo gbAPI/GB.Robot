@@ -223,8 +223,8 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
-        #region UpdateDocTypeCommand - Deafault Comment
-        /// <summary>Deafault Comment</summary>
+        #region UpdateDocTypeCommand - Обновление списка типов документа
+        /// <summary>Обновление списка типов документа</summary>
         public LambdaCommand UpdateDocTypeCommand { get; }
         private void OnUpdateDocTypeCommandExecuted()
         {
