@@ -130,14 +130,6 @@
                                 <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
                                 <TextBox Grid.Column="1"
                                          Text="{Binding SelectedRule.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <!--<i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="TextChanged">
-                                            <i:InvokeCommandAction Command="{Binding ChangeNameCommand}" 
-                                                                   CommandParameter="{Binding 
-                                                RelativeSource={RelativeSource AncestorType={x:Type TextBox}},
-                                                Path=Text}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>-->
                                 </TextBox>
                             </Grid>
                             <!--#endregion-->
@@ -223,9 +215,10 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
-                            <TextBox Text="{Binding RuleDescription}"/>
+                            <TextBox Text="{Binding RuleDescription, UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Grid.Row="1" 
                             Content="Добавить описание"
+                                    Command="{Binding SetDescription}"
                             Style="{StaticResource ButtonStyle}"/>
                         </Grid>
                     </GroupBox>

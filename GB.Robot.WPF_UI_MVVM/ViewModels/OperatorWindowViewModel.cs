@@ -100,6 +100,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         {
             get => _ruleDescription;
             set => Set(ref _ruleDescription, value);
+
         }
         #endregion
 
@@ -245,6 +246,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
                 Template = new(),
                 DocumentType = "",
                 Name = "",
+                Description = "",
                 RequiredFields = new()
             };
             Description = "";
@@ -299,18 +301,15 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         {
             if (SelectedRule == null || SelectedRule.Description == null)
                 return false;
-            if (SelectedRule.Description.Equals(Description))
+            if (SelectedRule.Description.Equals(RuleDescription, System.StringComparison.Ordinal))
                 return false;
 
             return true;
         }
         private void OnSetDescriptionExecuted()
         {
-            if (!SelectedRule.Description.Equals(Description))
-            {
-                SelectedRule.Description = Description;
+                SelectedRule.Description = RuleDescription;
                 SelectedRule = SelectedRule.Clone();
-            }
         }
         #endregion
 
