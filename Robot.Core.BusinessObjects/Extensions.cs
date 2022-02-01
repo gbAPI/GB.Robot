@@ -34,7 +34,7 @@ namespace Robot.Core
                 Name = decision.Name,
                 Description = decision.Description,
                 DocumentType = decision.DocumentType,
-                Template = new BO_Template { ID = decision.ID },
+                Template = new BO_Template { ID = decision.OutputTemplateID },
                 CreationDate = decision.CreationDate,
 
                 RequiredFields = decision.RequiredFields.Select((fd) => new BO_Field

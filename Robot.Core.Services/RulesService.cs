@@ -19,7 +19,7 @@ namespace Robot.Core
             if (resultID.Equals(-1))
                 return false;
             else
-                rule.ID = rule.ID;
+                rule.ID = resultID;
                 return true;
         }
 
