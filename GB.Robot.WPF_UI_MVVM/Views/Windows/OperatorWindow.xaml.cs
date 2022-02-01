@@ -24,6 +24,11 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Windows
             InitializeComponent();
         }
 
-       
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Window audit = new OperatorAuditWindow();
+            audit.Visibility = Visibility.Visible;
+            audit.Show();
+        }
     }
 }

@@ -17,5 +17,15 @@
         <Grid>
             <lelem:CaptionElement Height="25" CaptionTitle="{Binding Title}"/>
         </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Row="0"/>
+            <Grid Grid.Row="1">
+                
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

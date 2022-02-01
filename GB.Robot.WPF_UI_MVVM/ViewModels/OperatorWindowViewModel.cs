@@ -242,7 +242,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         {
             SelectedRule = new BO_Rule()
             {
-                ID = -1,
+                ID = 0,
                 Template = new(),
                 DocumentType = "",
                 Name = "",
@@ -308,8 +308,8 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         private void OnSetDescriptionExecuted()
         {
-                SelectedRule.Description = RuleDescription;
-                SelectedRule = SelectedRule.Clone();
+            SelectedRule.Description = RuleDescription;
+            SelectedRule = SelectedRule.Clone();
         }
         #endregion
 
@@ -354,10 +354,46 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
         private void OnSaveRuleExecuted()
         {
-            if (SelectedRule.ID == -1)
+            if (SelectedRule.ID == 0)
                 _rulesService.Add(SelectedRule);
             else
                 _rulesService.Update(SelectedRule);
+        }
+        #endregion
+
+        #region DeleteFieldCommand - Удаляем поле из решения
+        /// <summary>Удаляем поле из решения</summary>
+        public LambdaCommand DeleteFieldCommand { get; }
+
+        private bool CanDeleteFieldCommandExecute()
+        {
+            if (SelectedField != null && SelectedRule.RequiredFields.FirstOrDefault(f => f.Name == SelectedField.Name) != null)
+                return true;
+            return false;
+        }
+        private void OnDeleteFieldCommandExecuted()
+        {
+            var del = SelectedRule.RequiredFields.FirstOrDefault(f => f.Name == SelectedField.Name);
+            SelectedRule.RequiredFields.Remove(del);
+            SelectedRule = SelectedRule.Clone();
+        }
+        #endregion
+
+        #region DeleteRuleCommand - Удаляем правило
+        /// <summary>Удаляем правило</summary>
+        public LambdaCommand DeleteRuleCommand { get; }
+
+        private bool CanDeleteRuleCommandExecute()
+        {
+            if (SelectedRule != null && RulesList.FirstOrDefault(f => f.ID == SelectedRule.ID) != null)
+                return true;
+
+            return false;
+        }
+        private void OnDeleteRuleCommandExecuted()
+        {
+            var del = RulesList.FirstOrDefault(f => f.ID == SelectedRule.ID);
+            _rulesService.Delete(del);
         }
         #endregion
 
@@ -375,11 +411,15 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             UpdateFieldListCommand = new(OnUpdateFieldListCommandExecuted);
             UpdateDocTypeCommand = new(OnUpdateDocTypeCommandExecuted);
             SetDocTypeCommand = new(OnSetDocTypeCommandExecuted, CanSetDocTypeCommandExecute);
+            DeleteFieldCommand = new(OnDeleteFieldCommandExecuted,CanDeleteFieldCommandExecute);
+            DeleteRuleCommand = new(OnDeleteRuleCommandExecuted, CanDeleteRuleCommandExecute);
             #endregion
 
             _rulesService = rulesService;
             _externalObjectsService = externalObjectsService;
 
+
+            RulesList = _rulesService.GetAll().ToList();
             FieldsList = _externalObjectsService.GetScannerFields().ToList();
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
             DocTypesList = _externalObjectsService.GetAllDocumentTypes().ToList();

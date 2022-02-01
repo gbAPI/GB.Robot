@@ -32,12 +32,10 @@
                           Command="{Binding UpdateFieldListCommand}"
                           Style="{StaticResource MenuItemStyle}">
                 </MenuItem>
-                <!--<MenuItem Header="Обновить список шаблонов" 
-                          Height="25"
-                          Style="{StaticResource MenuItemStyle}">
-                </MenuItem>-->
+                
                 <MenuItem Header=" Аудит " 
                           Height="25"
+                          Click="MenuItem_Click"
                           Style="{StaticResource MenuItemStyle}">
                 </MenuItem>
             </Menu>
@@ -87,7 +85,7 @@
                                         Grid.Column="2"
                                         Foreground="Red"
                                         ToolTip="Удалить выбранное правило"
-                                        Style="{StaticResource ButtonStyle}" />
+                                        Command="{Binding DeleteRuleCommand}" />
                                 <ComboBox Grid.Column="1"
                                           SelectedIndex="-1"
                                           Margin="2"
@@ -160,14 +158,15 @@
                                 </Grid.ColumnDefinitions>
                                 <Button Content="Сохранить" 
                                         FontSize="14" 
-                                        Command="{Binding SaveRule}"
-                                        Style="{StaticResource ButtonStyle}"/>
-                                <Button Grid.Column="1" FontSize="14" Content="Удалить поле" Style="{StaticResource ButtonStyle}"/>
+                                        Command="{Binding SaveRule}"/>
+                                <Button Grid.Column="1" 
+                                        FontSize="14" 
+                                        Command="{Binding DeleteFieldCommand}"
+                                        Content="Удалить поле" />
                                 <Button Grid.Column="2" 
                                         FontSize="14" 
                                         Command="{Binding NewRule}"
-                                        Content="Новое дерево" 
-                                        Style="{StaticResource ButtonStyle}"/>
+                                        Content="Новое дерево"/>
                             </Grid>
                             <!--#endregion-->
                         </Grid>
@@ -195,8 +194,7 @@
                             </GroupBox>
                             <Button Grid.Row="1" 
                             Content="Добавить поле в дерево"
-                                    Command="{Binding AddFieldToRule}"
-                            Style="{StaticResource ButtonStyle}"/>
+                                    Command="{Binding AddFieldToRule}"/>
                         </Grid>
                         <!--#endregion-->
                     </Grid>
@@ -215,11 +213,11 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="35"/>
                             </Grid.RowDefinitions>
-                            <TextBox Text="{Binding RuleDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox TextWrapping="WrapWithOverflow"
+                                Text="{Binding RuleDescription, UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Grid.Row="1" 
                             Content="Добавить описание"
-                                    Command="{Binding SetDescription}"
-                            Style="{StaticResource ButtonStyle}"/>
+                                    Command="{Binding SetDescription}"/>
                         </Grid>
                     </GroupBox>
 
@@ -239,8 +237,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
-                            <Button Grid.Row="1" Content="Установить тип" 
-                                    Style="{StaticResource ButtonStyle}"
+                            <Button Grid.Row="1" Content="Установить тип"
                                     Command="{Binding SetDocTypeCommand}"/>
                         </Grid>
                     </GroupBox>
@@ -269,8 +266,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
-                            <Button Grid.Row="1" Content="Установить шаблон" 
-                                    Style="{StaticResource ButtonStyle}"
+                            <Button Grid.Row="1" Content="Установить шаблон"
                                     Command="{Binding SetTemplate}"/>
                         </Grid>
                     </GroupBox>
