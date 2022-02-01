@@ -3,7 +3,5 @@
                     xmlns:l="clr-namespace:GB.Robot.WPF_UI_MVVM.Infrastructure.Commands">
     
     <l:ColseWindow x:Key="CloseWindowCommand"/>
-    <l:MinWindow x:Key="MinimizeWindowCommand"/>
-    <l:MaxWindow x:Key="MaximizeWindowCommand" />
 
 </ResourceDictionary>

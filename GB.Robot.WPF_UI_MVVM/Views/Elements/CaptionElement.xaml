@@ -24,13 +24,15 @@
         <TextBlock Grid.Column="1" Text="{Binding ElementName=Caption, Path=CaptionTitle}" 
                    Style="{StaticResource CaptionTextStyle}" />
 
-        <Button Grid.Column="2" Style="{StaticResource MinButtonStyle}" 
-                Content="—" Command="{StaticResource MinimizeWindowCommand}"
+        <Button x:Name="MinButton" Grid.Column="2" Style="{StaticResource MinButtonStyle}" 
+                Content="—" 
+                Click="MinButton_Click"
                 IsEnabled="{Binding ElementName=Caption, Path=MinWindowOn}"/>
-        <Button Grid.Column="3" Style="{StaticResource MaxButtonStyle}" 
-                Content="↕" Command="{StaticResource MaximizeWindowCommand}" 
+        <Button Grid.Column="3" Style="{StaticResource MaxButtonStyle}"
+                Click="MaxiButton_Click"
+                Content="↕" 
                 IsEnabled="{Binding ElementName=Caption, Path=MaxWindowOn}"/>
-        <Button Grid.Column="4" Style="{StaticResource CloseButtonStyle}" 
-                Content="X" Command="{StaticResource CloseWindowCommand}"/>
+        <Button x:Name="CloseButton" Grid.Column="4" Style="{StaticResource CloseButtonStyle}" 
+                Content="X" Click="CloseButton_Click"/>
     </Grid>
 </UserControl>

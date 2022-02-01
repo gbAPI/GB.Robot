@@ -9,7 +9,7 @@
         DataContext="{Binding OperatorWindowModel, Source={StaticResource Locator}}"
         Style="{StaticResource FormStyle}"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="{Binding Height}" Width="{Binding Width}">
     <Grid Style="{StaticResource WindowStyle}">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="CRow" Height="25" />

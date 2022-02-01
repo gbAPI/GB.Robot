@@ -22,6 +22,26 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region Height: int - Высота окна
+        private int _height = 450;
+        /// <summary>Высота окна</summary>
+        public int Height
+        {
+            get => _height;
+            set => Set(ref _height, value);
+        }
+        #endregion
+
+        #region Width: int - Ширина окна
+        private int _width = 800;
+        /// <summary>Ширина окна</summary>
+        public int Width
+        {
+            get => _width;
+            set => Set(ref _width, value);
+        }
+        #endregion
+
         #region RulesList: List<BO_Rule> - Список решений
         private List<BO_Rule> _rulesList = default;
 

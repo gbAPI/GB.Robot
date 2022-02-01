@@ -20,11 +20,47 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <DataGrid Grid.Row="0"/>
+            <DataGrid Grid.Row="0" ItemsSource="{Binding RulesList}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="DocType" Binding="{Binding DocumentType}"/>
+                    <DataGridTextColumn Header="Template" Binding="{Binding Template.Name}"/>
+                    <DataGridTextColumn Header="DataTime" Binding="{Binding CreationDate}"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Grid Grid.Row="1">
-                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--#region Нижняя часть -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Входящие поля"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Поля решения"/>
+                <ListView Grid.Row="0" Grid.Column="1" 
+                          Style="{StaticResource ListViewHorizont}"
+                          ItemsSource="{Binding FieldsRule}">
+                </ListView>
+                <ListView Grid.Row="1" Grid.Column="1"
+                          Style="{StaticResource ListViewHorizont}"
+                          ItemsSource="{Binding FieldsRule}">
+                </ListView>
+                <GroupBox Header="Тип документа" Grid.Row="0" Grid.Column="2">
+                    <Label Content="ТипДок"/>
+                </GroupBox>
+
+                <GroupBox Header="Выбранный шаблон" Grid.Row="1" Grid.Column="2">
+                    <Label Content="Шаблон"/>
+                </GroupBox>
+                <!--#endregion-->
             </Grid>
         </Grid>
     </Grid>
