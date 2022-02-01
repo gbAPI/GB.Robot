@@ -1,6 +1,6 @@
 ﻿using GB.Robot.WPF_UI_MVVM.Services.Interfaces;
-using Robot.Core;
 using Microsoft.Extensions.DependencyInjection;
+using Robot.Core;
 
 namespace GB.Robot.WPF_UI_MVVM.Services
 {

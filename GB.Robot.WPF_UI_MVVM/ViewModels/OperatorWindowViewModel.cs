@@ -431,7 +431,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             UpdateFieldListCommand = new(OnUpdateFieldListCommandExecuted);
             UpdateDocTypeCommand = new(OnUpdateDocTypeCommandExecuted);
             SetDocTypeCommand = new(OnSetDocTypeCommandExecuted, CanSetDocTypeCommandExecute);
-            DeleteFieldCommand = new(OnDeleteFieldCommandExecuted,CanDeleteFieldCommandExecute);
+            DeleteFieldCommand = new(OnDeleteFieldCommandExecuted, CanDeleteFieldCommandExecute);
             DeleteRuleCommand = new(OnDeleteRuleCommandExecuted, CanDeleteRuleCommandExecute);
             #endregion
 

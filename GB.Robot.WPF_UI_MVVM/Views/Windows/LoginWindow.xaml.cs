@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
 
 namespace GB.Robot.WPF_UI_MVVM.Views.Windows
 {
@@ -21,7 +19,15 @@ namespace GB.Robot.WPF_UI_MVVM.Views.Windows
             Visibility = Visibility.Hidden;
             window.ShowDialog();
             Visibility = Visibility.Visible;
-            window = null;
+        }
+
+        private void AdministratorShow(object sender, RoutedEventArgs e)
+        {
+            AdministratorWindow window = new();
+            window.Visibility = Visibility.Visible;
+            Visibility = Visibility.Hidden;
+            window.ShowDialog();
+            Visibility = Visibility.Visible;
         }
     }
 }

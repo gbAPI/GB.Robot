@@ -1,21 +1,18 @@
 ﻿using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
 using Robot.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
 {
-    class OperatorAuditWindowViewModel: ViewModel
+    class OperatorAuditWindowViewModel : ViewModel
     {
         private readonly IRulesService _rulesService;
 
 
         #region Title: string - Название окна
         private string _Title = "Аудит запросов";
-        
+
 
         /// <summary>Название окна</summary>
         public string Title
@@ -69,7 +66,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public OperatorAuditWindowViewModel(IRulesService rulesService)
         {
             _rulesService = rulesService;
-            
+
             RulesList = _rulesService.GetAll().ToList();
             FieldsRule = RulesList[0].RequiredFields;
             FieldsRule.AddRange(FieldsRule);

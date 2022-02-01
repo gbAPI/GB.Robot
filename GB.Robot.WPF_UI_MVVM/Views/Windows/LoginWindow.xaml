@@ -33,9 +33,15 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="35"/>
                 </Grid.RowDefinitions>
                 <Button Grid.Row="1" Content="Оператор"  Click="OperatorShow"/>
-                <Button Grid.Row="2" Content="Администратор" />
+                <Button Grid.Row="2" Content="Администратор" Click="AdministratorShow"/>
+                <Label Grid.Row="5" Content="{Binding Tim}" 
+                       VerticalContentAlignment="Stretch"
+                       HorizontalContentAlignment="Stretch"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
             </Grid>
             <!--#endregion-->
         </Grid>

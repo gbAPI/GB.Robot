@@ -1,9 +1,4 @@
 ﻿using Robot.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.Infrastructure
 {
@@ -22,6 +17,6 @@ namespace GB.Robot.WPF_UI_MVVM.Infrastructure
 
             return result;
         }
-        
+
     }
 }
