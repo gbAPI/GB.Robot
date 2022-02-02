@@ -1,0 +1,49 @@
+﻿<Window x:Class="GB.Robot.WPF_UI_MVVM.Views.Windows.AdministratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Windows"
+        xmlns:lelem="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
+        mc:Ignorable="d"
+        DataContext="{Binding AdministratorWindowModel,Source={StaticResource Locator}}"
+        Style="{StaticResource FormStyle}"
+        Title="AdministratorWindow" Height="450" Width="800">
+    <Grid Style="{StaticResource WindowStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <lelem:CaptionElement CaptionTitle="{Binding Title}" Height="25" />
+        </Grid>
+        <!--#region Body -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Начало"/>
+                <Label Grid.Column="3" Content="Конец"/>
+                <DatePicker Grid.Column="1" SelectedDate="{Binding StartDate}"/>
+                <DatePicker Grid.Column="4" SelectedDate="{Binding EndDate}"/>
+                <Button Grid.Column="2" Content="Обновить"/>
+            </Grid>
+            
+            <lelem:СhartElement Grid.Row="2" 
+                                Foreground="{StaticResource PrimaryBrush}"/>
+        </Grid>
+        
+        <!--#endregion-->
+    </Grid>
+</Window>

@@ -1,0 +1,288 @@
+﻿<Window x:Class="GB.Robot.WPF_UI_MVVM.Views.Windows.OperatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Windows"
+        xmlns:lelem="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
+        DataContext="{Binding OperatorWindowModel, Source={StaticResource Locator}}"
+        Style="{StaticResource FormStyle}"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="{Binding Height}" Width="{Binding Width}">
+    <Grid Style="{StaticResource WindowStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="CRow" Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <lelem:CaptionElement CaptionTitle="{Binding Title}" Height="25"/>
+        </Grid>
+        <!--#region Body -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition />
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <!--#region Menu -->
+            <Menu Background="{StaticResource TransparentBrush}">
+                <MenuItem Header="Обновить список полей"
+                          Height="25"
+                          Command="{Binding UpdateFieldListCommand}"
+                          Style="{StaticResource MenuItemStyle}">
+                </MenuItem>
+                
+                <MenuItem Header=" Аудит " 
+                          Height="25"
+                          Click="MenuItem_Click"
+                          Style="{StaticResource MenuItemStyle}">
+                </MenuItem>
+            </Menu>
+            <!--#endregion-->
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <!--Колонка 0-->
+                    <ColumnDefinition Width="2*"/>
+                    <!--Колонка 1-->
+                    <ColumnDefinition Width="*"/>
+                    <!--Колонка 2-->
+                    <ColumnDefinition Width="*"/>
+                    <!--Колонка 3-->
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Grid.ColumnSpan="2" Header="Установка условий дерева">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <!--Колонка 0-->
+                            <ColumnDefinition Width="*"/>
+                            <!--Колонка 1-->
+                        </Grid.ColumnDefinitions>
+                        <!--#region Колонка 0 -->
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="25"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Выбрать решение" 
+                                   TextWrapping="Wrap" 
+                                   FontSize="10" 
+                                   Style="{StaticResource TextBlock}"/>
+                                <Button Content="X" 
+                                        Grid.Column="2"
+                                        Foreground="Red"
+                                        ToolTip="Удалить выбранное правило"
+                                        Command="{Binding DeleteRuleCommand}" />
+                                <ComboBox Grid.Column="1"
+                                          SelectedIndex="-1"
+                                          Margin="2"
+                                          Style="{StaticResource ComboBoxPrimaryStyle}"
+                                          ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                          ItemsSource="{Binding RulesList}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValue="{Binding SelectedRule}"
+                                          >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="DropDownOpened">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRulesList}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" 
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                            </Grid>
+
+                            <!--#region ID -->
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="ID" Style="{StaticResource TextBlock}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding SelectedRule.ID}" Style="{StaticResource TextBlock}"/>
+                            </Grid>
+                            <!--#endregion-->
+                            <!--#region Имя -->
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Имя" Style="{StaticResource TextBlock}"/>
+                                <TextBox Grid.Column="1"
+                                         Text="{Binding SelectedRule.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                </TextBox>
+                            </Grid>
+                            <!--#endregion-->
+
+                            <GroupBox Grid.Row="3" Header="Поля для решения">
+                                <ListBox 
+                                    ItemsSource="{Binding SelectedRule.RequiredFields}" 
+                                    DisplayMemberPath="Name"
+                                    SelectedValue="{Binding SelectedField}"
+                                    SelectedIndex="0">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}"
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListBox>
+                            </GroupBox>
+
+                            <!--#region Кнопки -->
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="Сохранить" 
+                                        FontSize="14" 
+                                        Command="{Binding SaveRule}"/>
+                                <Button Grid.Column="1" 
+                                        FontSize="14" 
+                                        Command="{Binding DeleteFieldCommand}"
+                                        Content="Удалить поле" />
+                                <Button Grid.Column="2" 
+                                        FontSize="14" 
+                                        Command="{Binding NewRule}"
+                                        Content="Новое дерево"/>
+                            </Grid>
+                            <!--#endregion-->
+                        </Grid>
+                        <!--#endregion-->
+
+                        <!--#region Колонка 1 -->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="Список полей">
+                                <ListBox ItemsSource="{Binding FieldsList}"
+                                         DisplayMemberPath="Name"
+                                         SelectedValue="{Binding SelectedScanerField}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}" 
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListBox>
+                            </GroupBox>
+                            <Button Grid.Row="1" 
+                            Content="Добавить поле в дерево"
+                                    Command="{Binding AddFieldToRule}"/>
+                        </Grid>
+                        <!--#endregion-->
+                    </Grid>
+                </GroupBox>
+                <!--#region Колонка 2 -->
+                <Grid Grid.Column="2" Margin="5,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Grid.Row="0" Header="Описание решения">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <TextBox TextWrapping="WrapWithOverflow"
+                                Text="{Binding RuleDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Button Grid.Row="1" 
+                            Content="Добавить описание"
+                                    Command="{Binding SetDescription}"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Row="1" Header="Тип документа">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <ComboBox ItemsSource="{Binding DocTypesList}"
+                                 Style="{StaticResource ComboBoxPrimaryStyle}"
+                                 ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                 SelectedValue="{Binding SelectedDocType}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="DropDownOpened">
+                                        <i:InvokeCommandAction Command="{Binding UpdateDocTypeCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <Button Grid.Row="1" Content="Установить тип"
+                                    Command="{Binding SetDocTypeCommand}"/>
+                        </Grid>
+                    </GroupBox>
+                    
+                    <GroupBox Grid.Row="2" Header="Шаблоны">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <ComboBox ItemsSource="{Binding TemplatesList}"
+                                 DisplayMemberPath="Name"
+                                 Style="{StaticResource ComboBoxPrimaryStyle}"
+                                 ItemContainerStyle="{StaticResource ComboBoxItemPrimaryStyle}"
+                                 SelectedValue="{Binding SelectedTemplate}"
+                                 SelectedIndex="{Binding SelectedTemplateIndex}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="DropDownOpened">
+                                        <i:InvokeCommandAction Command="{Binding UpdateTemplateListCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectedCommand}"
+                                                                   CommandParameter="{Binding 
+                                                RelativeSource={RelativeSource AncestorType={x:Type Selector}},
+                                                Path=SelectedValue}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <Button Grid.Row="1" Content="Установить шаблон"
+                                    Command="{Binding SetTemplate}"/>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Колонка 3 -->
+                <Grid Grid.Column="3">
+                    <GroupBox Header="Описание элемента">
+                        <TextBox IsEnabled="False"  Text="{Binding Description}"/>
+                    </GroupBox>
+                </Grid>
+                <!--#endregion-->
+            </Grid>
+        </Grid>
+        <!--#endregion-->
+    </Grid>
+</Window>
