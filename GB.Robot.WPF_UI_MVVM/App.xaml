@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Resources/Styles/ListBoxStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/LabelStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ListViewStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/DatePickerStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <vm:ViewModelLocator x:Key="Locator"/>
