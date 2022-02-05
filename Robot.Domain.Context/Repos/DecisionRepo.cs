@@ -16,5 +16,10 @@ namespace Robot.DAL.Repos
         {
             return _table.Include(x => x.RequiredFields).FirstOrDefault(x=>x.ID == id);
         }
+
+        public Decision GetByHash(string hash)
+        {
+            return _table.FirstOrDefault(ds=>ds.HashBytesOfFields.Equals(hash));
+        }
     }
 }

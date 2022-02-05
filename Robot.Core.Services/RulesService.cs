@@ -12,7 +12,8 @@ namespace Robot.Core
 
         public bool Add(BO_Rule rule)
         {
-            rule.CreationDate = DateTime.Now;
+            rule.CreationDate = DateTime.Now;    
+
             var resultID = _rulesRepo.Add(rule.To_DAL());
 
 
@@ -68,6 +69,7 @@ namespace Robot.Core
             decision.OutputTemplateID = rule.Template.ID;
             decision.DocumentType = rule.DocumentType;
             decision.Description = rule.Description;
+            
             decision.RequiredFields = rule.RequiredFields
                 .Select(x => new Field
                 {
@@ -76,7 +78,10 @@ namespace Robot.Core
                 })
                 .ToList();
 
+            decision.HashBytesOfFields = decision.GetHash();
+
             return _rulesRepo.Save(decision);
         }
+   
     }
 }
