@@ -10,5 +10,8 @@
         /// </summary>
         /// <returns>Список прошедших запросов</returns>
         BO_Query[] GetAll();
+
+
+        void Add(BO_Query query);
     }
 }

@@ -16,7 +16,6 @@ namespace Robot.Core
 
             var resultID = _rulesRepo.Add(rule.To_DAL());
 
-
             if (resultID.Equals(-1))
                 return false;
             else

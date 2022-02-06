@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Core.BusinessObjects"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Core.Services", "Robot.Core.Services\Robot.Core.Services.csproj", "{748FBEFA-68C4-4908-9216-295496A11AEE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{42D8B048-4924-4E3A-8FDB-BEA8C79CA40D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GB.Robot.WPF_UI_MVVM", "GB.Robot.WPF_UI_MVVM\GB.Robot.WPF_UI_MVVM.csproj", "{4F95D5D4-4B47-4B69-9BAA-A56070A95B85}"
 EndProject
 Global
