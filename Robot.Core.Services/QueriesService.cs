@@ -32,7 +32,7 @@ namespace Robot.Core
         {
             var templates = _extObjRepo.GetAllTemplates();
 
-            var tmpl = templates.FirstOrDefault(t => t.ID.Equals(query.OutputTemplate.ID));
+            var tmpl = templates.FirstOrDefault(t => t.ID.Equals(query.OutputTemplate?.ID));
 
             var dal_query = new Query
             {
