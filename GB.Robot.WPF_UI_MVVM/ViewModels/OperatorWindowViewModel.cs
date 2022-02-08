@@ -4,7 +4,6 @@ using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
 using Robot.Core;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
 {

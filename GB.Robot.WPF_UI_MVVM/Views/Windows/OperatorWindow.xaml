@@ -9,7 +9,11 @@
         DataContext="{Binding OperatorWindowModel, Source={StaticResource Locator}}"
         Style="{StaticResource FormStyle}"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="{Binding Height}" Width="{Binding Width}">
+        MinHeight="450"
+        MinWidth="800"
+        Title="{Binding Title}" 
+        Height="{Binding Height}" 
+        Width="{Binding Width}">
     <Grid Style="{StaticResource WindowStyle}">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="CRow" Height="25" />
@@ -43,13 +47,9 @@
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <!--Колонка 0-->
                     <ColumnDefinition Width="2*"/>
-                    <!--Колонка 1-->
                     <ColumnDefinition Width="*"/>
-                    <!--Колонка 2-->
                     <ColumnDefinition Width="*"/>
-                    <!--Колонка 3-->
                     <ColumnDefinition Width="*"/>
 
                 </Grid.ColumnDefinitions>
