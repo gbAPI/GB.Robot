@@ -54,7 +54,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #endregion
 
         #region SelectedRule: BO_Rule - Выбранное решение
-        private BO_Rule _selectedRule = new() { ID = -1 };
+        private BO_Rule _selectedRule = new() { ID = -1};
         /// <summary>Выбранное правило</summary>
         public BO_Rule SelectedRule
         {
@@ -405,6 +405,9 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
         private bool CanDeleteRuleCommandExecute()
         {
+            if (RulesList == null)
+                return false;
+
             if (SelectedRule != null && RulesList.FirstOrDefault(f => f.ID == SelectedRule.ID) != null)
                 return true;
 
@@ -416,6 +419,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             _rulesService.Delete(del);
         }
         #endregion
+
 
         public OperatorWindowViewModel(IRulesService rulesService, IExternalObjectsService externalObjectsService)
         {
@@ -433,6 +437,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             SetDocTypeCommand = new(OnSetDocTypeCommandExecuted, CanSetDocTypeCommandExecute);
             DeleteFieldCommand = new(OnDeleteFieldCommandExecuted, CanDeleteFieldCommandExecute);
             DeleteRuleCommand = new(OnDeleteRuleCommandExecuted, CanDeleteRuleCommandExecute);
+
             #endregion
 
             _rulesService = rulesService;
@@ -444,6 +449,9 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
             DocTypesList = _externalObjectsService.GetAllDocumentTypes().ToList();
             DocTypesList.Insert(0, "");
+
         }
+
+        
     }
 }

@@ -17,7 +17,7 @@
             Hoverable="False" 
             DataTooltip="{x:Null}">
             <lvc:CartesianChart.Series>
-                <lvc:LineSeries x:Name="LineChart" Values="{Binding CValue}" Fill="#FF6B1493"/>
+                <lvc:LineSeries x:Name="LineChart" Values="{Binding CValue}" Fill="{StaticResource PrimaryBrush}"/>
             </lvc:CartesianChart.Series>
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Количество запросов" MinValue="-5"/>
