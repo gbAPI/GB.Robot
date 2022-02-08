@@ -10,5 +10,12 @@
         /// </summary>
         /// <returns>Список прошедших запросов</returns>
         BO_Query[] GetAll();
+
+
+        /// <summary>
+        /// Добавляет сообщение
+        /// </summary>
+        /// <param name="query">Сообщение</param>
+        void Add(BO_Query query);
     }
 }
