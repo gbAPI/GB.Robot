@@ -1,25 +1,22 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using Common.RMQServices.Base;
+using Common.RMQServices.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Common.RMQServices.Base;
-using Common.RMQServices.Interfaces;
 
-namespace Common.RMQServices
+namespace RMQMessageServices
 {
     /// <summary>
     /// Cервис обмена сообщениями с шиной данных RabbitMQ <b> для сканировщика</b>
     /// </summary>
-    public class ScanerRabbitService : IScanerRabbitService
+    public class ScanerRabbitService : RMQServiceBase, IScanerRabbitService
     {
-        private readonly RMQService _service;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         public ScanerRabbitService()
         {
-            _service = new();
         }
 
         /// <summary>
@@ -30,10 +27,10 @@ namespace Common.RMQServices
         /// <param name="cancellationToken"><i>Необязательный параметр.</i>
         /// Распространяет уведомление о том, что операции следует отменить.</param>
         /// <returns></returns>
-        public async Task SendAsync<T>([NotNull] T message, CancellationToken cancellationToken = default)
+        public async Task SendAsync<T>(T message, CancellationToken cancellationToken = default)
             where T : class
         {
-            await _service.SendMessageAsync(message, Extensions.RobotProcessor, cancellationToken);
+            await SendMessageAsync(message, Extensions.RobotProcessor, cancellationToken);
         }
 
         /// <summary>
@@ -41,10 +38,10 @@ namespace Common.RMQServices
         /// </summary>
         /// <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
         /// <param name="message">Само сообщение</param>
-        public void Send<T>([NotNull] T message)
+        public void Send<T>(T message)
             where T : class
         {
-            _service.SendMessage(message, Extensions.RobotProcessor);
+            SendMessage(message, Extensions.RobotProcessor);
         }
 
         /// <summary>
@@ -54,12 +51,12 @@ namespace Common.RMQServices
         /// <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
         /// <i>Вид void Metod(T message){}</i></param>
         /// <param name="cancellationToken"><i>Необязательный параметр.</i>
-        /// Распространяет уведомление о том, что операции следует отменить.</param></param>
+        /// Распространяет уведомление о том, что операции следует отменить.</param>
         /// <returns></returns>
-        public async Task SubscribeAsync<T>([NotNull] Action<T> recivMetod, CancellationToken cancellationToken = default)
+        public async Task SubscribeScanerAsync<T>(Action<T> recivMetod, CancellationToken cancellationToken = default)
             where T : class
         {
-            await _service.SubscribesAsync(recivMetod, Extensions.Scaners, Extensions.Scaners, cancellationToken);
+            await SubscribesAsync(recivMetod, Extensions.Scaners, Extensions.Scaners, cancellationToken);
         }
 
         /// <summary>
@@ -68,10 +65,10 @@ namespace Common.RMQServices
         /// <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
         /// <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
         /// <i>Вид void Metod(T message){}</i></param>
-        public void Subscribe<T>([NotNull] Action<T> recivMetod)
+        public void SubscribeScaner<T>(Action<T> recivMetod)
             where T : class
         {
-            _service.Subscribes(recivMetod, Extensions.Scaners, Extensions.Scaners);
+            Subscribes(recivMetod, Extensions.Scaners, Extensions.Scaners);
         }
     }
 }
