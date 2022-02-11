@@ -4,6 +4,7 @@ using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
 using Robot.Core;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
 {
@@ -423,6 +424,28 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
         public OperatorWindowViewModel(IRulesService rulesService, IExternalObjectsService externalObjectsService)
         {
+            _rulesService = rulesService;
+            _externalObjectsService = externalObjectsService;
+
+            Task<BO_Rule[]> rulesTask = Task.Run(() => _rulesService.GetAll());
+            Task<BO_Field[]> fieldsTask = Task.Run(() => _externalObjectsService.GetScannerFields());
+
+
+            Task<BO_Template[]> templatesTask = Task.Run(() =>
+            {
+                Task.WaitAny(fieldsTask);
+
+                return _externalObjectsService.GetTAllTemplates();
+            }
+            );
+
+            Task<ICollection<string>> docTypesTask = Task.Run(() => 
+            {
+                Task.WaitAny(templatesTask);
+
+                return _externalObjectsService.GetAllDocumentTypes(); 
+            });
+
             #region Инициализация команд
             UpdateRulesList = new(OnDropDownOpenCommandExecuted);
             SelectedCommand = new(OnSelectedCommandExecuted);
@@ -440,18 +463,15 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
             #endregion
 
-            _rulesService = rulesService;
-            _externalObjectsService = externalObjectsService;
 
+
+            Task.WaitAll(rulesTask,docTypesTask);
 
             RulesList = _rulesService.GetAll().ToList();
             FieldsList = _externalObjectsService.GetScannerFields().ToList();
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
             DocTypesList = _externalObjectsService.GetAllDocumentTypes().ToList();
             DocTypesList.Insert(0, "");
-
         }
-
-        
     }
 }
