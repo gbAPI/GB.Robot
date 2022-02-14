@@ -8,6 +8,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
     class OperatorAuditWindowViewModel : ViewModel
     {
         private readonly IRulesService _rulesService;
+        private readonly IQueriesService _queriesService;
 
 
         #region Title: string - Название окна
@@ -62,11 +63,33 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
+        #region QueriesList: List<BO_Query> - Список запросов
+        private List<BO_Query> _queriesList = default;
+        /// <summary>Список запросов</summary>
+        public List<BO_Query> QueriesList
+        {
+            get => _queriesList;
+            set => Set(ref _queriesList, value);
+        }
+        #endregion
 
-        public OperatorAuditWindowViewModel(IRulesService rulesService)
+        #region SelectedQuery: BO_Query - Выделенный запрос
+        private BO_Query _selectedQuery = default;
+        /// <summary>Выделенный запрос</summary>
+        public BO_Query SelectedQuery
+        {
+            get => _selectedQuery;
+            set => Set(ref _selectedQuery, value);
+        }
+        #endregion
+
+
+        public OperatorAuditWindowViewModel(IRulesService rulesService, IQueriesService queriesService)
         {
             _rulesService = rulesService;
+            _queriesService = queriesService;
 
+            QueriesList = _queriesService.GetAll().ToList();
             RulesList = _rulesService.GetAll().ToList();
             FieldsRule = RulesList[0].RequiredFields;
             FieldsRule.AddRange(FieldsRule);

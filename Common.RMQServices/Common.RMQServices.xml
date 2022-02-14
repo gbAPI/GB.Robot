@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Common.RMQServices</name>
+    </assembly>
+    <members>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.SendMessageAsync``1(``0,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.SendMessageAsync``1(``0,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.SendMessage``1(``0,System.String)">
+            <summary>
+            Метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.SendMessage``1(``0,System.String,System.String)">
+            <summary>
+            Метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.SubscribesAsync``1(System.Action{``0},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.SubscribesAsync``1(System.Action{``0},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.Subscribes``1(System.Action{``0},System.String,System.String,System.String)">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Base.RMQServiceBase.Subscribes``1(System.Action{``0},System.String,System.String)">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.SendMessageAsync``1(``0,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.SendMessageAsync``1(``0,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.SendMessage``1(``0,System.String)">
+            <summary>
+            Метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.SendMessage``1(``0,System.String,System.String)">
+            <summary>
+            Метод отправляющий данные в шину данных
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="body">Сообщение</param>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="keyRout">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.SubscribesAsync``1(System.Action{``0},System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.SubscribesAsync``1(System.Action{``0},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.Subscribes``1(System.Action{``0},System.String,System.String,System.String)">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="exchangeName">Имя обменика для приема сообщения</param>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRMQServiceBase.Subscribes``1(System.Action{``0},System.String,System.String)">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="subscribeID">ID подписчика</param>
+            <param name="action">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="keyRouting">Ключ маршрута сообщения</param>
+        </member>
+        <member name="T:Common.RMQServices.Interfaces.IRobotRabbitService">
+            <summary>
+            Интерфейс сервиса обмена сообщениями с шиной данных RabbitMQ <b> для робота</b>
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRobotRabbitService.SendToTemplatersAsync``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных (получатель шаблонизатор)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRobotRabbitService.SendToTemplaters``1(``0)">
+            <summary>
+            Метод отправляющий данные в шину данных (получатель шаблонизатор)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRobotRabbitService.SubscribeRobotAsync``1(System.Action{``0},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IRobotRabbitService.SubscribeRobot``1(System.Action{``0})">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+        </member>
+        <member name="T:Common.RMQServices.Interfaces.IScanerRabbitService">
+            <summary>
+            Интерфейс сервиса обмена сообщениями с шиной данных RabbitMQ <b> для сканировщика</b>
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IScanerRabbitService.SendAsync``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IScanerRabbitService.Send``1(``0)">
+            <summary>
+            Метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IScanerRabbitService.SubscribeScanerAsync``1(System.Action{``0},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.IScanerRabbitService.SubscribeScaner``1(System.Action{``0})">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+        </member>
+        <member name="T:Common.RMQServices.Interfaces.ITemplateRabbitService">
+            <summary>
+            Интерфейс сервиса обмена сообщениями с шиной данных RabbitMQ <b> для шаблонизатора</b>
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.ITemplateRabbitService.SendAsync``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.ITemplateRabbitService.Send``1(``0)">
+            <summary>
+            Метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.ITemplateRabbitService.SubscribeTemplateAsync``1(System.Action{``0},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.Interfaces.ITemplateRabbitService.SubscribeTemplate``1(System.Action{``0})">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+        </member>
+        <member name="T:Common.RMQServices.RobotRabbitService">
+            <summary>
+            Cервис обмена сообщениями с шиной данных RabbitMQ <b> для робота</b>
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.RobotRabbitService.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.RobotRabbitService.SendToTemplatersAsync``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных (получатель шаблонизатор)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.RobotRabbitService.SendToTemplaters``1(``0)">
+            <summary>
+            Метод отправляющий данные в шину данных (получатель шаблонизатор)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+        </member>
+        <member name="M:Common.RMQServices.RobotRabbitService.SubscribeRobotAsync``1(System.Action{``0},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.RobotRabbitService.SubscribeRobot``1(System.Action{``0})">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+        </member>
+        <member name="T:Common.RMQServices.ScanerRabbitService">
+            <summary>
+            Cервис обмена сообщениями с шиной данных RabbitMQ <b> для сканировщика</b>
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.ScanerRabbitService.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.ScanerRabbitService.SendAsync``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.ScanerRabbitService.Send``1(``0)">
+            <summary>
+            Метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+        </member>
+        <member name="M:Common.RMQServices.ScanerRabbitService.SubscribeScanerAsync``1(System.Action{``0},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.ScanerRabbitService.SubscribeScaner``1(System.Action{``0})">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+        </member>
+        <member name="T:Common.RMQServices.TemplateRabbitService">
+            <summary>
+            Сервис обмена сообщениями с шиной данных RabbitMQ <b>для шаблонизатора </b>
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.TemplateRabbitService.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:Common.RMQServices.TemplateRabbitService.SendAsync``1(``0,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.TemplateRabbitService.Send``1(``0)">
+            <summary>
+            Метод отправляющий данные в шину данных (получатель робот)
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="message">Само сообщение</param>
+        </member>
+        <member name="M:Common.RMQServices.TemplateRabbitService.SubscribeTemplateAsync``1(System.Action{``0},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронный метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+            <param name="cancellationToken"><i>Необязательный параметр.</i>
+            Распространяет уведомление о том, что операции следует отменить.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.RMQServices.TemplateRabbitService.SubscribeTemplate``1(System.Action{``0})">
+            <summary>
+            Метод подписки на входящие сообщения
+            </summary>
+            <typeparam name="T">Тип сообщения (обязательно класс)</typeparam>
+            <param name="recivMetod">Метод обрабатывающий получающий в качестве параметра сообщения
+            <i>Вид void Metod(T message){}</i></param>
+        </member>
+    </members>
+</doc>

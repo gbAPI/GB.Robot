@@ -22,13 +22,16 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <DataGrid Grid.Row="0" ItemsSource="{Binding RulesList}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Grid.Row="0" ItemsSource="{Binding QueriesList}" 
+                      SelectedValue="{Binding SelectedQuery}"
+                      AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    
                     <DataGridTextColumn Header="DocType" Binding="{Binding DocumentType}"/>
-                    <DataGridTextColumn Header="Template" Binding="{Binding Template.Name}"/>
-                    <DataGridTextColumn Header="DataTime" Binding="{Binding CreationDate}"/>
+                    <DataGridTextColumn Header="Template" Binding="{Binding OutputTemplate.Name}"/>
+                    <DataGridTextColumn Header="DataTime" Binding="{Binding MessageDate}"/>
+                    <DataGridTextColumn Header="Errors" Binding="{Binding ErrorDescription}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="1">
@@ -54,11 +57,11 @@
                           ItemsSource="{Binding FieldsRule}">
                 </ListView>
                 <GroupBox Header="Тип документа" Grid.Row="0" Grid.Column="2">
-                    <Label Content="ТипДок"/>
+                    <Label Content="{Binding SelectedQuery.DocumentType}"/>
                 </GroupBox>
 
                 <GroupBox Header="Выбранный шаблон" Grid.Row="1" Grid.Column="2">
-                    <Label Content="Шаблон"/>
+                    <Label Content="{Binding SelectedQuery.OutputTemplate.Name}"/>
                 </GroupBox>
                 <!--#endregion-->
             </Grid>
