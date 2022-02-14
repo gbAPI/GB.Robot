@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RMQMessageServices
+namespace Common.RMQServices
 {
     /// <summary>
     /// Cервис обмена сообщениями с шиной данных RabbitMQ <b> для сканировщика</b>

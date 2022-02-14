@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RMQMessageServices
+namespace Common.RMQServices
 {
     /// <summary>
     /// Cервис обмена сообщениями с шиной данных RabbitMQ <b> для робота</b>
@@ -53,7 +53,7 @@ namespace RMQMessageServices
         public async Task SubscribeRobotAsync<T>(Action<T> recivMetod,
                                             CancellationToken cancellationToken = default) where T : class
         {
-            await SubscribesAsync<T>(recivMetod, Extensions.RobotProcessor, Extensions.RobotProcessor, cancellationToken);
+            await SubscribesAsync(recivMetod, Extensions.RobotProcessor, Extensions.RobotProcessor, cancellationToken);
         }
 
         /// <summary>

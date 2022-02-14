@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.RMQServices\Common.RMQServices.csproj" />
     <ProjectReference Include="..\Robot.Core.Services\Robot.Core.Services.csproj" />
   </ItemGroup>
 
