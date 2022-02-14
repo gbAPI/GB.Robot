@@ -38,20 +38,22 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         }
         #endregion
 
-        public LoginWindowViewModel(IRobotRabbitService rabbitService,
-                                    IProcessingService processingService,
-                                    IScanerRabbitService scanerRabbit,
+        public LoginWindowViewModel(IProcessingService processingService,
+                                    //IRobotRabbitService rabbitService,
+                                    //IScanerRabbitService scanerRabbit,
                                     IExternalObjectsService externalObjects,
                                     IQueriesService queriesService)
         {
             _timer = new Timer(1000);
             _timer.Elapsed += Timer_Elapsed;
             _timer.Start();
-            _rabbitService = rabbitService;
+            
             _processingService = processingService;
             _externalObjects = externalObjects;
             _queriesService = queriesService;
-            _rabbitService.SubscribeRobotAsync<DataTransferModel>(OnMessage);
+
+            //_rabbitService = rabbitService;
+            //_rabbitService.SubscribeRobotAsync<DataTransferModel>(OnMessage);
 
 #if false
             Dictionary<string, IEnumerable<string>> idata = new();
