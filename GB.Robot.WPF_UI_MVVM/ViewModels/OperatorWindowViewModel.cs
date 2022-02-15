@@ -279,7 +279,8 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public LambdaCommand AddFieldToRule { get; }
         private void OnAddFieldToRuleExecuted()
         {
-
+            if (SelectedRule.RequiredFields is null)
+                return;
             if (SelectedRule.RequiredFields.FirstOrDefault(f => f.Name == SelectedScanerField.Name) == null)
             {
                 SelectedRule.RequiredFields.Add(SelectedScanerField);

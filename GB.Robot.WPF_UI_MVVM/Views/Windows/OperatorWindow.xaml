@@ -75,17 +75,13 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="1"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Выбрать решение" 
                                    TextWrapping="Wrap" 
                                    FontSize="10" 
                                    Style="{StaticResource TextBlock}"/>
-                                <Button Content="X" 
-                                        Grid.Column="2"
-                                        Foreground="Red"
-                                        ToolTip="Удалить выбранное правило"
-                                        Command="{Binding DeleteRuleCommand}" />
+                                
                                 <ComboBox Grid.Column="1"
                                           SelectedIndex="-1"
                                           Margin="2"
@@ -132,7 +128,7 @@
                             </Grid>
                             <!--#endregion-->
 
-                            <GroupBox Grid.Row="3" Header="Поля для решения">
+                            <GroupBox Grid.Row="3" Header="Поля решения">
                                 <ListBox 
                                     ItemsSource="{Binding SelectedRule.RequiredFields}" 
                                     DisplayMemberPath="Name"
@@ -145,6 +141,9 @@
                                                 RelativeSource={RelativeSource AncestorType={x:Type Selector}},
                                                 Path=SelectedValue}"/>
                                         </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <i:InvokeCommandAction Command="{Binding DeleteFieldCommand}"/>
+                                        </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ListBox>
                             </GroupBox>
@@ -156,14 +155,16 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Content="Сохранить" 
+                                <Button Grid.Column="1"
+                                        Content="Сохранить" 
                                         FontSize="14" 
                                         Command="{Binding SaveRule}"/>
-                                <Button Grid.Column="1" 
-                                        FontSize="14" 
-                                        Command="{Binding DeleteFieldCommand}"
-                                        Content="Удалить поле" />
                                 <Button Grid.Column="2" 
+                                        FontSize="14" 
+                                        Style="{StaticResource AllertButtonStyle}"
+                                        Command="{Binding DeleteRuleCommand}"
+                                        Content="Удалить решение" />
+                                <Button Grid.Column="0" 
                                         FontSize="14" 
                                         Command="{Binding NewRule}"
                                         Content="Новое дерево"/>
@@ -176,7 +177,7 @@
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="1"/>
                             </Grid.RowDefinitions>
                             <GroupBox Grid.Row="0" Header="Список полей">
                                 <ListBox ItemsSource="{Binding FieldsList}"
@@ -189,12 +190,13 @@
                                                 RelativeSource={RelativeSource AncestorType={x:Type Selector}},
                                                 Path=SelectedValue}"/>
                                         </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <i:InvokeCommandAction Command="{Binding AddFieldToRule}"/>
+                                        </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ListBox>
                             </GroupBox>
-                            <Button Grid.Row="1" 
-                            Content="Добавить поле в дерево"
-                                    Command="{Binding AddFieldToRule}"/>
+                            
                         </Grid>
                         <!--#endregion-->
                     </Grid>
