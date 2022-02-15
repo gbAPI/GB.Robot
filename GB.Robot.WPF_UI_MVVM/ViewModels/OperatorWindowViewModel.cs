@@ -54,7 +54,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #endregion
 
         #region SelectedRule: BO_Rule - Выбранное решение
-        private BO_Rule _selectedRule = new() { ID = -1};
+        private BO_Rule _selectedRule = new() { ID = -1 };
         /// <summary>Выбранное правило</summary>
         public BO_Rule SelectedRule
         {
@@ -62,6 +62,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             set
             {
                 if (Set(ref _selectedRule, value))
+                {
                     if (value != null)
                     {
                         if (value.Template != null)
@@ -78,14 +79,15 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
                         }
                         SelectedDocType = value.DocumentType;
                     }
+                }
             }
 
         }
         #endregion
 
-        #region SelectedField: BO_Field - Выделенное поле из списка решений
+        #region SelectedField: BO_Field - Выделенное поле решения
         private BO_Field _selectedField = default;
-        /// <summary>Выделенное поле из списка решений</summary>
+        /// <summary>Выделенное поле решения</summary>
         public BO_Field SelectedField
         {
             get => _selectedField;
@@ -129,7 +131,22 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         /// <summary>Список полей</summary>
         public List<BO_Field> FieldsList
         {
-            get => _fieldsList;
+            get
+            {
+                if(_selectedRule is null || _selectedRule.RequiredFields is null)
+                {
+                    return _fieldsList;
+                }
+
+                List<BO_Field> result = new();
+                foreach (var item in _fieldsList)
+                {
+                    if (_selectedRule.RequiredFields.FirstOrDefault(x => x.Name == item.Name) == null)
+                        result.Add(item);
+                }
+
+                return result;
+            }
             set => Set(ref _fieldsList, value);
         }
         #endregion
@@ -191,7 +208,11 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         private void OnSelectedCommandExecuted(object sender)
         {
             if (sender is BO_Rule)
+            {
                 RuleDescription = (sender as BO_Rule).Description;
+                OnPropertyChanged(nameof(FieldsList));
+            }
+
             if (sender != null)
             {
                 object description = sender.GetType().GetProperty("Description", typeof(string))?.GetValue(sender);
@@ -287,6 +308,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
                 //var tmp = SelectedRule;
                 SelectedRule = SelectedRule.Clone();
             }
+            OnPropertyChanged(nameof(FieldsList));
         }
         #endregion
 
@@ -397,6 +419,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             var del = SelectedRule.RequiredFields.FirstOrDefault(f => f.Name == SelectedField.Name);
             SelectedRule.RequiredFields.Remove(del);
             SelectedRule = SelectedRule.Clone();
+            OnPropertyChanged(nameof(FieldsList));
         }
         #endregion
 
@@ -453,6 +476,6 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
         }
 
-        
+
     }
 }

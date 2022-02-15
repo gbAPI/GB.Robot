@@ -1,7 +1,9 @@
-﻿using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
+﻿using GB.Robot.WPF_UI_MVVM.Infrastructure.Commands;
+using GB.Robot.WPF_UI_MVVM.ViewModels.Base;
 using Robot.Core;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
 {
@@ -84,16 +86,27 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #endregion
 
 
+        #region UpdateQueriesList - Обновляем список поступивших запросов
+        /// <summary>Обновляем список поступивших запросов</summary>
+        public LambdaCommandAsync UpdateQueriesListCommand { get; }
+        private async Task OnUpdateQueriesListCommandExecuted()
+        {
+            await Task.Run(() => QueriesList = _queriesService.GetAll().ToList());
+        }
+        #endregion
+
         public OperatorAuditWindowViewModel(IRulesService rulesService, IQueriesService queriesService)
         {
             _rulesService = rulesService;
             _queriesService = queriesService;
 
+            UpdateQueriesListCommand = new LambdaCommandAsync(OnUpdateQueriesListCommandExecuted);
+
             QueriesList = _queriesService.GetAll().ToList();
-            RulesList = _rulesService.GetAll().ToList();
-            FieldsRule = RulesList[0].RequiredFields;
-            FieldsRule.AddRange(FieldsRule);
-            FieldsRule.AddRange(FieldsRule);
+            //RulesList = _rulesService.GetAll().ToList();
+            //FieldsRule = RulesList[0].RequiredFields;
+            //FieldsRule.AddRange(FieldsRule);
+            //FieldsRule.AddRange(FieldsRule);
         }
     }
 }

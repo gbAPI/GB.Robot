@@ -3,12 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Windows"
         xmlns:lelem="clr-namespace:GB.Robot.WPF_UI_MVVM.Views.Elements"
         DataContext="{Binding OperatorAuditWindowModel, Source={StaticResource Locator}}"
         Style="{StaticResource FormStyle}"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Activated">
+            <i:InvokeCommandAction Command="{Binding UpdateQueriesListCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Style="{StaticResource WindowStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -27,7 +33,6 @@
                       AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                    
                     <DataGridTextColumn Header="DocType" Binding="{Binding DocumentType}"/>
                     <DataGridTextColumn Header="Template" Binding="{Binding OutputTemplate.Name}"/>
                     <DataGridTextColumn Header="DataTime" Binding="{Binding MessageDate}"/>
