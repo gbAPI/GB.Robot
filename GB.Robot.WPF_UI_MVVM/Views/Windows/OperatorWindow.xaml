@@ -279,7 +279,7 @@
                 <!--#region Колонка 3 -->
                 <Grid Grid.Column="3">
                     <GroupBox Header="Описание элемента">
-                        <TextBox IsEnabled="False"  Text="{Binding Description}"/>
+                        <TextBox IsEnabled="False" TextWrapping="Wrap"  Text="{Binding Description}"/>
                     </GroupBox>
                 </Grid>
                 <!--#endregion-->
