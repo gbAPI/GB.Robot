@@ -65,18 +65,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
                 {
                     if (value != null)
                     {
-                        if (value.Template != null)
-                        {
-                            for (int i = 0; i <= TemplatesList.Count - 1; i++)
-                            {
-                                if (value.Template.ID == TemplatesList[i].ID)
-                                    SelectedTemplateIndex = i;
-                            }
-                        }
-                        else
-                        {
-                            SelectedTemplateIndex = -1;
-                        }
+                        SelectedTemplate = TemplatesList.FirstOrDefault(x => x.Name == value.Template.Name);
                         SelectedDocType = value.DocumentType;
                     }
                 }
@@ -121,7 +110,11 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public string RuleDescription
         {
             get => _ruleDescription;
-            set => Set(ref _ruleDescription, value);
+            set
+            {
+                Set(ref _ruleDescription, value);
+                SelectedRule.Description = value;
+            }
 
         }
         #endregion
@@ -167,17 +160,11 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public BO_Template SelectedTemplate
         {
             get => _selectedTemplate;
-            set => Set(ref _selectedTemplate, value);
-        }
-        #endregion
-
-        #region SelectedTemplateIndex: int - Индекс выбранного шаблона
-        private int _selectedTemplateIndex = 0;
-        /// <summary>Индекс выбранного шаблона</summary>
-        public int SelectedTemplateIndex
-        {
-            get => _selectedTemplateIndex;
-            set => Set(ref _selectedTemplateIndex, value);
+            set
+            {
+                Set(ref _selectedTemplate, value);
+                SelectedRule.Template = value;
+            }
         }
         #endregion
 
@@ -197,7 +184,11 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         public string SelectedDocType
         {
             get => _selectedDocType;
-            set => Set(ref _selectedDocType, value);
+            set
+            {
+                Set(ref _selectedDocType, value);
+                SelectedRule.DocumentType = value;
+            }
         }
         #endregion
 
@@ -237,21 +228,21 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         private void OnUpdateTemplateListCommandExecuted()
         {
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
-            if (SelectedRule != null)
-            {
-                if (SelectedRule.Template != null)
-                {
-                    for (int i = 0; i <= TemplatesList.Count - 1; i++)
-                    {
-                        if (SelectedRule.Template.ID == TemplatesList[i].ID)
-                            SelectedTemplateIndex = i;
-                    }
-                }
-                else
-                {
-                    SelectedTemplateIndex = -1;
-                }
-            }
+            //if (SelectedRule != null)
+            //{
+            //    if (SelectedRule.Template != null)
+            //    {
+            //        for (int i = 0; i <= TemplatesList.Count - 1; i++)
+            //        {
+            //            if (SelectedRule.Template.ID == TemplatesList[i].ID)
+            //                SelectedTemplateIndex = i;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        SelectedTemplateIndex = -1;
+            //    }
+            //}
         }
         #endregion
 
@@ -270,9 +261,7 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         private void OnUpdateDocTypeCommandExecuted()
         {
             List<string> lis = _externalObjectsService.GetAllDocumentTypes().ToList();
-            lis.Insert(0, "");
             DocTypesList = lis;
-            SelectedDocType = SelectedRule?.DocumentType ?? "";
         }
         #endregion
 
@@ -472,7 +461,6 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
             FieldsList = _externalObjectsService.GetScannerFields().ToList();
             TemplatesList = _externalObjectsService.GetTAllTemplates().ToList();
             DocTypesList = _externalObjectsService.GetAllDocumentTypes().ToList();
-            DocTypesList.Insert(0, "");
 
         }
 
