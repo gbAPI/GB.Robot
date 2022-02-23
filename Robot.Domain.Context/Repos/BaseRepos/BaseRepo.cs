@@ -42,7 +42,7 @@ namespace Robot.DAL.Repos
         {
             return _table.Find(id);
         }
-
+        
         public virtual List<T> GetAll()
         {
             return _table.ToList();
@@ -60,7 +60,7 @@ namespace Robot.DAL.Repos
         {
             try
             {
-                _dbContext.SaveChanges();
+                SaveChangesAsync();
                 return true;
 
             }
@@ -68,6 +68,11 @@ namespace Robot.DAL.Repos
             {
                 return false;
             }
+        }
+
+        private async void SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
