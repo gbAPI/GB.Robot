@@ -39,68 +39,46 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
         #endregion
 
         public LoginWindowViewModel(IProcessingService processingService,
-                                    //IRobotRabbitService rabbitService,
-                                    //IScanerRabbitService scanerRabbit,
+                                    IRobotRabbitService rabbitService,
+                                    IScanerRabbitService scanerRabbit,
                                     IExternalObjectsService externalObjects,
                                     IQueriesService queriesService)
         {
             _timer = new Timer(1000);
             _timer.Elapsed += Timer_Elapsed;
             _timer.Start();
-            
+
             _processingService = processingService;
             _externalObjects = externalObjects;
             _queriesService = queriesService;
 
-            //_rabbitService = rabbitService;
-            //_rabbitService.SubscribeRobotAsync<DataTransferModel>(OnMessage);
-
-#if false
-            Dictionary<string, IEnumerable<string>> idata = new();
-            idata.Add("ФИО", new List<string>() { "Фио" });
-            idata.Add("Адрес", new List<string>() { "Тулевск" });
-
-            scanerRabbit.SendAsync(new DataTransferModel()
-            {
-                MessageID = 1,
-                DocumentType = "Паспорт",
-                InputData = idata,
-                PackageProcessed = false
-            });
-#endif
+            _rabbitService = rabbitService;
+            _rabbitService.SubscribeRobotAsync<DataTransferModel>(OnMessage);
         }
 
         private void OnMessage(DataTransferModel data)
         {
-
-            string errDescription = "OK";
-            BO_Template templ = null;
-
             BO_Query query = new()
             {
                 DocumentType = data.DocumentType,
                 ID = data.MessageID,
                 MessageDate = DateTime.Now,
-                ErrorDescription = errDescription,
-                OutputTemplate = templ
+                ErrorDescription = "OK",
+                OutputTemplate = null
             };
 
             if (!_processingService.ProcessInputData(data, out int templateId))
             {
-                errDescription = "Нет подходящих правил";
+                query.ErrorDescription = "Нет подходящих правил";
                 _queriesService.Add(query);
                 return;
             }
 
-            templ = _externalObjects.GetTAllTemplates().FirstOrDefault(x => x.ID == templateId);
-
-
+            query.OutputTemplate = _externalObjects.GetTAllTemplates().FirstOrDefault(x => x.ID == templateId);
 
             _queriesService.Add(query);
             data.OutputTemplateID = templateId;
             _rabbitService.SendToTemplatersAsync(data);
-
-
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e) => Tim = DateTime.Now.ToString("G");
