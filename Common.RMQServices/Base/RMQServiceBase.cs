@@ -334,7 +334,7 @@ namespace Common.RMQServices.Base
 
         private static string CreateName<T>(string postFix = null, bool isDlx = false)
         {
-            string tmessage = typeof(T).ToString();
+            string tmessage = typeof(T).Name;
             if (!string.IsNullOrWhiteSpace(postFix))
                 tmessage += $"_{postFix}";
 
