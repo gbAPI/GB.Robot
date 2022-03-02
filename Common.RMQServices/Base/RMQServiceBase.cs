@@ -203,6 +203,8 @@ namespace Common.RMQServices.Base
                 _subs.Add(keyRouting, ac);
             }
 
+            var tst = _busAdv.Container;
+
             var queue = await _busAdv.QueueDeclareAsync($"{exchangeName}_{subscribeID}", cancellationToken);
             var exchange = await _busAdv.ExchangeDeclareAsync(exchangeName,
                                                           ExchangeType.Topic,
