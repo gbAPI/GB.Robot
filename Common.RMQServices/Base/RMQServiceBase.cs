@@ -203,6 +203,8 @@ namespace Common.RMQServices.Base
                 _subs.Add(keyRouting, ac);
             }
 
+            var tst = _busAdv.Container;
+
             var queue = await _busAdv.QueueDeclareAsync($"{exchangeName}_{subscribeID}", cancellationToken);
             var exchange = await _busAdv.ExchangeDeclareAsync(exchangeName,
                                                           ExchangeType.Topic,
@@ -334,7 +336,7 @@ namespace Common.RMQServices.Base
 
         private static string CreateName<T>(string postFix = null, bool isDlx = false)
         {
-            string tmessage = typeof(T).ToString();
+            string tmessage = typeof(T).Name;
             if (!string.IsNullOrWhiteSpace(postFix))
                 tmessage += $"_{postFix}";
 

@@ -12,7 +12,7 @@ namespace GB.Robot.WPF_UI_MVVM.Services
         public static IServiceCollection AddServices(this IServiceCollection services) => services
            .AddTransient<IDataService, DataService>()
            .AddTransient<IUserDialog, UserDialog>()
-           .AddTransient<IRobotRabbitService, RobotRabbitService>()
+           .AddTransient<IRobotRabbitService, RobotRabbitClient>()
            .AddScoped<IRulesService, RulesService>()
            .AddScoped<IExternalObjectsService, ExternalObjectsService>()
            .AddScoped<IQueriesService, QueriesService>()

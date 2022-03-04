@@ -3,10 +3,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Цвета -->
-    <Color x:Key="PrimaryColor" A="#FF" R="0" G="70" B="0" />
+    <!--<Color x:Key="PrimaryColor" A="#FF" R="0" G="70" B="0" />-->
+    <Color x:Key="PrimaryColor" A="#FF" R="206" G="66" B="0" />
     <Color x:Key="BackgroundColor" A="#FF" R="#FF" G="#FF" B="#FF" />
     <Color x:Key="DisableColor" A="#AA" R="#30" G="#30" B="#30"/>
-    <Color x:Key="LightPrimaryColor" A="#FF" R="50" G="150" B="50"/>
+    <Color x:Key="LightPrimaryColor" A="#FF" R="239" G="121" B="63"/>
+    <!--<Color x:Key="LightPrimaryColor" A="#FF" R="50" G="150" B="50"/>-->
     <!--#endregion-->
 
     <!--#region Кисти -->
