@@ -6,6 +6,7 @@ using Robot.Core.Integration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace GB.Robot.WPF_UI_MVVM.ViewModels
@@ -78,7 +79,8 @@ namespace GB.Robot.WPF_UI_MVVM.ViewModels
 
             _queriesService.Add(query);
             data.OutputTemplateID = templateId;
-            _rabbitService.SendToTemplatersAsync(data);
+            //_rabbitService.SendToTemplaters(data);
+            Task.Run(async ()=> await _rabbitService.SendToTemplatersAsync(data)).RunSynchronously();
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e) => Tim = DateTime.Now.ToString("G");

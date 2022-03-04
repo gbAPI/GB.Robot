@@ -43,9 +43,9 @@ namespace Common.RMQServices
 
         public async Task SendToTemplatersAsync<T>(T message, CancellationToken cancellationToken = default) where T : class
         {
-            var mes = JsonConvert.SerializeObject(message);
-            var body = Encoding.UTF8.GetBytes(mes);
-            _channel.BasicPublish("DataTransferModel", "temp",body: body);
+            //var mes = JsonConvert.SerializeObject(message);
+            //var body = Encoding.UTF8.GetBytes(mes);
+            //_channel.BasicPublish("DataTransferModel", "temp",body: body);
         }
 
         public void SubscribeRobot<T>(Action<T> recivMetod) where T : class
